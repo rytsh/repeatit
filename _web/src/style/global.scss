@@ -1,0 +1,20 @@
+// tailwindcss
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* stylelint-disable-next-line no-invalid-position-at-import-rule */
+@import 'codemirror/lib/codemirror.css';
+
+html,
+body {
+  @apply h-full w-full;
+}
+
+.drag-line-right {
+  @apply z-10 bg-slate-300 hover:bg-red-400 block absolute right-0 top-0 h-full w-1 hover:cursor-col-resize;
+}
+
+.drag-line-bottom {
+  @apply z-10 bg-slate-300 hover:bg-red-400 block absolute bottom-0 w-full h-1 hover:cursor-row-resize;
+}

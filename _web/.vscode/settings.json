@@ -1,0 +1,35 @@
+{
+  "prettier.enable": false,
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.detectIndentation": false,
+  "eslint.enable": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.format.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  },
+  "stylelint.packageManager": "pnpm",
+  "stylelint.validate": [
+    "css",
+    "scss",
+    "less",
+    "postcss",
+    "html",
+  ],
+  "eslint.validate": [
+    "html",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "svelte"
+  ],
+  "svelte.enable-ts-plugin": true,
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  },
+  "files.insertFinalNewline": true,
+  "scss.lint.unknownAtRules": "ignore",
+}

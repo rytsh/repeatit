@@ -1,0 +1,15 @@
+{
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-sass-guidelines"
+  ],
+  "rules": {
+    "at-rule-no-unknown": null,
+    "scss/at-rule-no-unknown": null,
+    "selector-max-id": 2,
+    "max-nesting-depth": 3
+  }
+}
