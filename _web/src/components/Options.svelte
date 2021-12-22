@@ -58,10 +58,19 @@
       }
     });
   });
+
+  // Settings
+  const toggleSettings = () => {
+    uiConfig.update((v) =>
+      update(v, {
+        showSettings: { $set: !v.showSettings },
+      })
+    );
+  };
 </script>
 
 <div
-  class={`flex justify-between flex-wrap p-1 bg-yellow-50 ${
+  class={`flex justify-between flex-wrap p-1 bg-yellow-50 border-b-4 border-red-400 ${
     $uiConfig.showSettings ? "" : "hidden"
   }`}
   bind:this={htmlSettings}
@@ -113,8 +122,14 @@
   </div>
 </div>
 
-<div class="h-5 flex items-center bg-gray-200 justify-end text-sm pr-1">
-  {$convertConfig.template}
-  {" | "}
-  {[...$convertConfig.functions.keys()].join(",")}
-</div>
+<button
+  class="h-5 px-1 flex items-center bg-gray-200 text-sm pr-1 w-full justify-between hover:bg-gray-500 hover:text-gray-100 relative"
+  on:click|stopPropagation={toggleSettings}
+>
+  <div>Settings</div>
+  <div>
+    {$convertConfig.template}
+    {" | "}
+    {[...$convertConfig.functions.keys()].join(",")}
+  </div>
+</button>

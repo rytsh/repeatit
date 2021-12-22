@@ -1,12 +1,15 @@
+const goVersion = import.meta.env.VITE_GO_VERSION;
+const sprigVersion = import.meta.env.VITE_SPRIG_VERSION;
+
 const versions = [
   {
     name: "go",
-    version: "1.17.5",
+    version: goVersion,
     link: "https://golang.org/doc/devel/release.html",
   },
   {
     name: "sprig",
-    version: "v3.2.2",
+    version: sprigVersion,
     link: "https://masterminds.github.io/sprig",
   },
 ];

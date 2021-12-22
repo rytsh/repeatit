@@ -12,7 +12,8 @@ func main() {
 
 	translate.SetGlobalTemplate(translate.NewTemplate())
 
-	jscript.SetFunctions()
+	release := jscript.SetFunctions()
+	defer release()
 
 	println("WASM initialized")
 

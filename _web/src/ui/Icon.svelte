@@ -10,7 +10,8 @@
   export let height = "24";
   export let width = "24";
 
-  export let className: string = undefined;
+  let className: string = undefined;
+  export { className as class };
   export let position: PosTypes = undefined;
 
   const totalClass = [className, position].join(" ");

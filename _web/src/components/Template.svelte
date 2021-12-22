@@ -4,7 +4,8 @@
   import Code from "@/ui/Code.svelte";
   import { onMount } from "svelte";
 
-  export let className = "";
+  let className = "";
+  export { className as class };
 
   let moveLineWidth: HTMLElement;
   let moveLineHeight: HTMLElement;
@@ -53,7 +54,7 @@
   bind:clientWidth={moveTargetWidth}
   bind:clientHeight={moveTargetHeight}
 >
-  <Code title="Template" className="sm-max:pb-1 sm:pr-1" watchCode="template" />
+  <Code title="Template" class="sm-max:pb-1 sm:pr-1" watchCode="template" />
   <span bind:this={moveLineWidth} class="sm-max:hidden drag-line-right" />
   <span bind:this={moveLineHeight} class="sm:hidden drag-line-bottom" />
 </div>

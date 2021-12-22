@@ -1,0 +1,50 @@
+name: build-deploy
+on:
+  push:
+    branches:
+      - main
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    container:
+      image: golang:1.17.5
+    steps:
+      - uses: actions/checkout@v2
+      - name: build wasm
+        run: |
+          ./build.sh --build
+          tar -cvf wasm.tar _web/.env _web/public/wasm/repeatit.wasm
+      - name: Upload Artifact WASM
+        uses: actions/upload-artifact@v2
+        with:
+          name: wasm
+          path: wasm.tar
+          retention-days: 1
+  frontend:
+    needs: backend
+    runs-on: ubuntu-latest
+    container:
+      image: rytsh/frontend-pnpm:v0.0.2
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: wasm
+          path: .
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: pnpm-deps
+          restore-keys: pnpm-deps
+      - name: install deps and build
+        run: |
+          tar -vxf wasm.tar
+          cd _web
+          pnpm install --prefer-offline
+          pnpm build
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_web/dist
+          cname: repeatit.io

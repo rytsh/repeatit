@@ -1,6 +1,8 @@
 <script lang="ts">
   export let href = "";
-  export let className = "";
+  let className = "";
+
+  export { className as class };
 
   const classNames = ["github-corner", className];
 </script>

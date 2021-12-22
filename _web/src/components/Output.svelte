@@ -1,7 +1,8 @@
 <script lang="ts">
   import Code from "@/ui/Code.svelte";
 
-  export let className = "";
+  let className = "";
+  export { className as class };
 </script>
 
 <div class={className}>

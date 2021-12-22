@@ -10,7 +10,8 @@
   let code: HTMLElement;
 
   export let title = "title";
-  export let className = "";
+  let className = "";
+  export { className as class };
 
   export let watchCode: codesKeys;
   let value = "";
@@ -84,16 +85,16 @@
       err ? "bg-red-300" : ""
     } ${success ? "bg-green-300" : ""}`}
   >
-    <span>{title}</span>
+    <span class="truncate">{title}</span>
     <button
       class="text-white font-bold py-2 h-full flex items-center"
       on:click={copy}
       title={copied ? "copied" : "copy to clipboard"}
     >
       {#if copied}
-        <Icon icon="tick" className="fill-gray-500 hover:fill-red-400" />
+        <Icon icon="tick" class="fill-gray-500 hover:fill-red-400" />
       {:else}
-        <Icon icon="copy" className="fill-gray-500 hover:fill-red-400" />
+        <Icon icon="copy" class="fill-gray-500 hover:fill-red-400" />
       {/if}
     </button>
   </div>

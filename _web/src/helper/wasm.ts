@@ -1,6 +1,6 @@
 import { loading } from "@/store";
 
-const initWasm = (wasmFile = "./repeatit.wasm") => {
+const initWasm = (wasmFile = "./wasm/repeatit.wasm") => {
   if (!WebAssembly.instantiateStreaming) { // polyfill
     WebAssembly.instantiateStreaming = async (resp, importObject) => {
       const source = await (await resp).arrayBuffer();

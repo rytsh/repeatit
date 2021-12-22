@@ -2,6 +2,11 @@ package jscript
 
 import "syscall/js"
 
-func SetFunctions() {
-	js.Global().Set("render", js.FuncOf(Render))
+func SetFunctions() func() {
+	renderjs := js.FuncOf(Render)
+	js.Global().Set("render", renderjs)
+
+	return func() {
+		renderjs.Release()
+	}
 }

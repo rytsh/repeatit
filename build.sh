@@ -35,5 +35,11 @@ if [[ "$1" == '--' ]]; then shift; fi
 
 if [[ "$R_BUILD" == "Y" ]]; then
   echo "Building..."
-  GOOS=js GOARCH=wasm go build -ldflags="-s -w" -o ./_web/public/repeatit.wasm ./cmd/jsgo/main.go
+  GOOS=js GOARCH=wasm go build -ldflags="-s -w" -o ./_web/public/wasm/repeatit.wasm ./cmd/jsgo/main.go
+fi
+
+if [[ "$R_BUILD" == "Y" ]]; then
+  echo "Extracting env variables..."
+  grep github.com/Masterminds/sprig/v3 go.mod | cut -d " " -f3 | xargs -I{} echo VITE_SPRIG_VERSION={} > _web/.env
+  go version | cut -d " " -f3- | xargs -I{} echo VITE_GO_VERSION={} >> _web/.env
 fi
