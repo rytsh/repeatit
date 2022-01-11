@@ -1,0 +1,22 @@
+ID: {{uuidv4}}
+SecretName: {{.name | b64enc }}
+
+{{- if eq .name "machine" }}
+# welcome back
+{{else}}
+# welcome
+{{end}}
+
+{{- with .specs.resources }}
+metal: {{ .metal }}
+water: {{ .water }}
+{{- end }}
+
+# reviews
+{{- range .reviews}}
+# {{$.name}} {{.name}} {{repeat .point "⭐"}}
+{{- end}}
+
+{{range $index, $value := .comments }}
+Reviews {{ $index }}: {{ $value }}
+{{- end }}

@@ -1,0 +1,15 @@
+name: planet
+specs:
+  resources:
+    metal: 50%
+    water: 20%
+
+reviews:
+- name: water
+  point: 5
+- name: radioactivity
+  point: 1
+
+comments:
+- Metal core
+- Oxygen low
