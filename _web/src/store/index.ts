@@ -1,10 +1,15 @@
+import { fullScreenKeys } from "@/helper/code";
 import { writable } from "svelte/store";
 
 const initialEditorConfig: CodeMirror.EditorConfiguration = {
-  mode: "javascript",
+  mode: "yaml",
   lineNumbers: true,
   tabSize: 2,
-  scrollbarStyle: "native",
+  lineWrapping: true,
+  styleActiveLine: true,
+  matchBrackets: true,
+  showTrailingSpace: true,
+  extraKeys: fullScreenKeys,
 };
 
 export const examples = writable(undefined);
@@ -13,6 +18,9 @@ export const editorConfig = writable(initialEditorConfig);
 
 // Loading
 export const loading = writable(true);
+
+// Loading
+export const codeTheme = writable("default");
 
 // Codes
 const initialCodes = {

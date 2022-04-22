@@ -7,7 +7,7 @@
   } from "@/store";
   import { onMount } from "svelte";
   import update from "immutability-helper";
-  import versions from "@/store/versions";
+  import { versions } from "@/store/versions";
 
   let htmlSettings: HTMLDivElement;
 
@@ -100,8 +100,7 @@
           />
           <label
             for={`settings-ch-${i}`}
-            class="text-sm ml-3 font-medium text-gray-900 dark:text-gray-300"
-            >{funcName}</label
+            class="text-sm ml-3 font-medium text-gray-900">{funcName}</label
           >
         </div>
       {/each}

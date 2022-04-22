@@ -5,7 +5,8 @@
   import { onMount } from "svelte";
 
   let className = "";
-  export { className as class };
+  let width = 0;
+  export { className as class, width };
 
   let moveLineWidth: HTMLElement;
   let moveLineHeight: HTMLElement;
@@ -37,6 +38,8 @@
 
     mediaQuery = window.matchMedia("(min-width: 640px)");
     mediaQuery.addEventListener("change", (m) => {
+      if (!moveTarget.style) return;
+
       if (m.matches) {
         moveTarget.style.height = null;
         moveTarget.style.width = `${moveTargetWidth}px`;
@@ -49,7 +52,8 @@
 </script>
 
 <div
-  class={`min-w-min [min-height:2.25rem] ${className}`}
+  class={`min-w-min [min-height:2.75rem] ${className}`}
+  style={`position: relative; width: ${width}px;`}
   bind:this={moveTarget}
   bind:clientWidth={moveTargetWidth}
   bind:clientHeight={moveTargetHeight}

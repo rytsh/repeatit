@@ -8,10 +8,10 @@ import (
 	"github.com/rytsh/repeatit/translate"
 )
 
-func Render(this js.Value, args []js.Value) interface{} {
+func Render(this js.Value, args []js.Value) any {
 	mainArgs := args
 
-	handler := js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+	handler := js.FuncOf(func(this js.Value, args []js.Value) any {
 		resolve := args[0]
 		reject := args[1]
 
@@ -34,7 +34,7 @@ func Render(this js.Value, args []js.Value) interface{} {
 	return promiseConstructor.New(handler)
 }
 
-func renderWithError(args []js.Value) (interface{}, error) {
+func renderWithError(args []js.Value) (any, error) {
 	reader := strings.NewReader(args[0].String())
 
 	values, err := translate.Decode(reader)

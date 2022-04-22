@@ -10,6 +10,8 @@ Usage: $0 <OPTIONS>
 OPTIONS:
   --build
     Compile and generate wasm file
+  --tag <tag>
+    Tag the image with <tag>
 
   -h, --help
     This help page
@@ -21,6 +23,10 @@ while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
   --build)
     R_BUILD="Y"
     ;;
+  --tag)
+    R_TAG="$2"
+    shift
+    ;;
   -h | --help )
     usage
     exit
@@ -30,7 +36,7 @@ while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
     usage
     exit 1
     ;;
-esac; shift 1; done
+esac; shift; done
 if [[ "$1" == '--' ]]; then shift; fi
 
 if [[ "$R_BUILD" == "Y" ]]; then
@@ -41,5 +47,9 @@ fi
 if [[ "$R_BUILD" == "Y" ]]; then
   echo "Extracting env variables..."
   grep github.com/Masterminds/sprig/v3 go.mod | cut -d " " -f3 | xargs -I{} echo VITE_SPRIG_VERSION={} > _web/.env
-  go version | cut -d " " -f3- | xargs -I{} echo VITE_GO_VERSION={} >> _web/.env
+  go version | cut -d " " -f3- | xargs -I{} echo VITE_GO_VERSION="GOOS=js GOARCH=wasm {}" >> _web/.env
+
+  if [[ -n "$R_TAG" ]]; then
+    echo VITE_REPEATIT_VERSION="${R_TAG##*/}" >> _web/.env
+  fi
 fi

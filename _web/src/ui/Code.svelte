@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { codes, codesKeys, editorConfig } from "@/store";
+  import { codes, codesKeys, codeTheme, editorConfig } from "@/store";
   import update from "immutability-helper";
 
   import CodeMirror from "codemirror";
@@ -10,6 +10,7 @@
   let code: HTMLElement;
 
   export let title = "title";
+  export let placeholder = "# F11 to toggle fullscreen";
   let className = "";
   export { className as class };
 
@@ -37,9 +38,21 @@
     );
   };
 
+  const setTheme = (theme: string) => {
+    editor.setOption("theme", theme);
+  };
+
+  $: {
+    editor && setTheme($codeTheme);
+  }
+
   onMount(() => {
-    editor = CodeMirror(code, $editorConfig);
+    editor = CodeMirror(code, {
+      ...$editorConfig,
+      placeholder: `${placeholder}`,
+    });
     editor.setSize("100%", "100%");
+    editor.setOption("theme", $codeTheme);
 
     codes.subscribe((v) => {
       if (
@@ -79,31 +92,26 @@
   });
 </script>
 
-<div class={`h-full w-full divide2 ${className}`}>
-  <div
-    class={`px-1 bg-gray-100 border-b border-gray-200 flex flex-row items-center justify-between ${
-      err ? "bg-red-300" : ""
-    } ${success ? "bg-green-300" : ""}`}
-  >
-    <span class="truncate">{title}</span>
-    <button
-      class="text-white font-bold py-2 h-full flex items-center"
-      on:click={copy}
-      title={copied ? "copied" : "copy to clipboard"}
+<div class={`flex min-h-full h-full w-full ${className}`}>
+  <div class="flex-1 grid h-full grid-rows-[auto_1fr]">
+    <div
+      class={`px-1 bg-gray-100 dark:bg-yellow-200 border-b border-gray-200 dark:border-gray-600 flex flex-row items-center justify-between ${
+        err ? "bg-red-400 dark:bg-red-400" : ""
+      } ${success ? "bg-green-300 dark:bg-green-300" : ""}`}
     >
-      {#if copied}
-        <Icon icon="tick" class="fill-gray-500 hover:fill-red-400" />
-      {:else}
-        <Icon icon="copy" class="fill-gray-500 hover:fill-red-400" />
-      {/if}
-    </button>
+      <span class="truncate">{title}</span>
+      <button
+        class="text-white font-bold py-2 h-full flex items-center fill-gray-500 hover:fill-red-400"
+        on:click={copy}
+        title={copied ? "copied" : "copy to clipboard"}
+      >
+        {#if copied}
+          <Icon icon="tick" />
+        {:else}
+          <Icon icon="copy" />
+        {/if}
+      </button>
+    </div>
+    <code bind:this={code} class="overflow-auto" />
   </div>
-  <code bind:this={code} class="overflow-y-auto" />
 </div>
-
-<style lang="scss">
-  .divide2 {
-    display: grid;
-    grid-template-rows: 2rem minmax(0, 1fr);
-  }
-</style>

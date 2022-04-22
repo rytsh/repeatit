@@ -1,5 +1,6 @@
 const goVersion = import.meta.env.VITE_GO_VERSION;
 const sprigVersion = import.meta.env.VITE_SPRIG_VERSION;
+const repeatitVersion = import.meta.env.VITE_REPEATIT_VERSION;
 
 const versions = [
   {
@@ -14,4 +15,4 @@ const versions = [
   },
 ];
 
-export default versions;
+export { versions, repeatitVersion };

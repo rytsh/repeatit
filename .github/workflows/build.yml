@@ -1,18 +1,18 @@
 name: build-deploy
 on:
   push:
-    branches:
-      - main
+    tags:
+      - v[0-9]*
 jobs:
   backend:
     runs-on: ubuntu-latest
     container:
-      image: golang:1.17.5
+      image: golang:1.18.1
     steps:
       - uses: actions/checkout@v2
       - name: build wasm
         run: |
-          ./build.sh --build
+          ./build.sh --build --tag ${{github.ref_name}}
           tar -cvf wasm.tar _web/.env _web/public/wasm/repeatit.wasm
       - name: Upload Artifact WASM
         uses: actions/upload-artifact@v2
@@ -24,7 +24,7 @@ jobs:
     needs: backend
     runs-on: ubuntu-latest
     container:
-      image: rytsh/frontend-pnpm:v0.0.2
+      image: rytsh/frontend-pnpm:v0.0.3
     steps:
       - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
