@@ -57,7 +57,8 @@
 
 <button
   on:click|stopPropagation={themeSwitch}
-  class={`fill-gray-600 hover:fill-red-400 ${className}`}
+  class={`fill-gray-600 hover:fill-gray-900 ${className}`}
+  title={`${darkMode ? "Light" : "Dark"} mode`}
 >
   <Icon icon={darkMode ? "sun" : "moon"} />
 </button>

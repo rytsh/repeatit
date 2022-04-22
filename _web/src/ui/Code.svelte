@@ -95,13 +95,13 @@
 <div class={`flex min-h-full h-full w-full ${className}`}>
   <div class="flex-1 grid h-full grid-rows-[auto_1fr]">
     <div
-      class={`px-1 bg-gray-100 dark:bg-yellow-200 border-b border-gray-200 dark:border-gray-600 flex flex-row items-center justify-between ${
-        err ? "bg-red-400 dark:bg-red-400" : ""
-      } ${success ? "bg-green-300 dark:bg-green-300" : ""}`}
+      class={`px-1 bg-gray-100 dark:bg-gray-400 border-b border-gray-200 dark:border-gray-600 flex flex-row items-center justify-between ${
+        err ? "!bg-red-400 !dark:bg-red-400" : ""
+      } ${success ? "!bg-green-300 !dark:bg-green-300" : ""}`}
     >
       <span class="truncate">{title}</span>
       <button
-        class="text-white font-bold py-2 h-full flex items-center fill-gray-500 hover:fill-red-400"
+        class="text-white font-bold py-2 h-full flex items-center fill-gray-600 dark:fill-gray-900 hover:fill-gray-800 dark:hover:fill-gray-100"
         on:click={copy}
         title={copied ? "copied" : "copy to clipboard"}
       >

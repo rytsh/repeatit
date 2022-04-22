@@ -75,9 +75,13 @@
   }`}
   bind:this={htmlSettings}
 >
-  <div class="">
+  <div>
     {#each versions as { name, version, link }}
-      <a href={link} target="_blank" class="block hover:bg-red-400 px-1">
+      <a
+        href={link}
+        target="_blank"
+        class="block hover:bg-yellow-200 hover:underline px-1"
+      >
         <span class="w-14 inline-block">{name}</span>
         <span>{version}</span>
       </a>
@@ -96,7 +100,7 @@
             data-type="function"
             data-function={funcName}
             checked={$convertConfig.functions.has(funcName)}
-            class="bg-gray-100 focus:ring-blue-500 text-blue-600 border-gray-300 h-4 w-4  rounded dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+            class="bg-gray-100 focus:ring-blue-500 text-blue-600 border-gray-300 h-4 w-4 rounded dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
           />
           <label
             for={`settings-ch-${i}`}
@@ -111,7 +115,7 @@
       <select
         value={$convertConfig.template}
         data-type="template"
-        class="appearance-none rounded-none text-sm block w-full bg-gray-50 cursor-pointer hover:bg-gray-500 hover:text-gray-100"
+        class="rounded-none text-sm block w-full bg-gray-50 cursor-pointer"
       >
         {#each convertTemplates as tempName}
           <option value={tempName}>{tempName}</option>
@@ -122,7 +126,7 @@
 </div>
 
 <button
-  class="h-5 px-1 flex items-center bg-gray-200 text-sm pr-1 w-full justify-between hover:bg-gray-500 hover:text-gray-100 relative"
+  class="px-1 flex items-center bg-gray-200 text-sm pr-1 w-full justify-between hover:bg-gray-400 relative"
   on:click|stopPropagation={toggleSettings}
 >
   <div>Settings</div>

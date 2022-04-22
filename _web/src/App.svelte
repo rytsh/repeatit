@@ -33,7 +33,7 @@
 <div class="h-full w-full grid grid-rows-[auto_1fr_auto]">
   <div>
     <NavBar class="border-b border-gray-300 flex-shrink-0" />
-    <div class="border-b border-gray-300 flex-shrink-0">
+    <div class="border-b border-gray-300 dark:border-slate-600 flex-shrink-0">
       <Options />
     </div>
   </div>

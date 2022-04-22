@@ -41,14 +41,14 @@
 <div class={`bg-yellow-200 flex items-center justify-between ${className}`}>
   <div class="flex-grow flex items-center self-stretch">
     <button
-      class="flex items-center h-full text-lg font-semibold p-1 pr-5 bg-transparent text-black hover:bg-green-500 hover:text-gray-100 fill-gray-600 hover:fill-white"
+      class="flex items-center h-full text-lg font-semibold p-1 pr-5 bg-transparent text-black bg-green-300 hover:bg-green-500 hover:text-gray-100 fill-gray-600 hover:fill-white"
       on:click|stopPropagation={run}
     >
       <Icon icon="play" class="pr-1" />
       <span>repeatit</span>
     </button>
     <select
-      class="appearance-none self-stretch bg-gray-50 cursor-pointer hover:bg-gray-500 hover:text-gray-100 w-24 rounded-none truncate px-1"
+      class="self-stretch bg-gray-50 cursor-pointer w-28 rounded-none truncate px-1"
       bind:value={selected}
     >
       <option value="">examples</option>
@@ -65,6 +65,6 @@
   <Theme class="px-2" />
   <Corner
     href="https://github.com/rytsh/repeatit"
-    class="h-10 hover:fill-red-400 fill-gray-400"
+    class="h-10 hover:fill-red-500 fill-gray-400"
   />
 </div>
