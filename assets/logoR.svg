@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 75 24" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" xmlns="http://www.w3.org/2000/svg">
+  <path d="M2,20.25L6,17.5L2,14.75L6,12L2,9.25L6,6.5L2,3.75L6,1L21.5,12L6,23L2,20.25Z" style="fill-rule: nonzero; stroke-linejoin: miter; fill: rgb(42, 42, 42); stroke: rgb(201, 201, 201);"/>
+  <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 12px; stroke: rgb(201, 201, 201); stroke-linejoin: miter; stroke-width: 0.2px; white-space: pre;" x="26" y="16">repeatit</text>
+</svg>

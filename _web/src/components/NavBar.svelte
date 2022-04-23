@@ -44,7 +44,7 @@
       class="flex items-center h-full text-lg font-semibold p-1 pr-5 bg-transparent text-black bg-green-300 hover:bg-green-500 hover:text-gray-100 fill-gray-600 hover:fill-white"
       on:click|stopPropagation={run}
     >
-      <Icon icon="play" class="pr-1" />
+      <Icon icon="repeatit" class="pr-1" />
       <span>repeatit</span>
     </button>
     <select
