@@ -5,7 +5,7 @@
 
   import CodeMirror from "codemirror";
   import Icon from "@/ui/Icon.svelte";
-  import copyClip from "clipboard-copy";
+  import { copyClip } from "@/helper/copy";
 
   let code: HTMLElement;
 

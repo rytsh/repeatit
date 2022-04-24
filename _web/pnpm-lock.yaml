@@ -9,7 +9,6 @@ specifiers:
   '@typescript-eslint/parser': ^5.5.0
   autoprefixer: ^10.4.0
   axios: ^0.24.0
-  clipboard-copy: ^4.0.1
   codemirror: ^5.64.0
   eslint: ^8.3.0
   eslint-config-google: ^0.14.0
@@ -20,7 +19,6 @@ specifiers:
   immutability-helper: ^3.1.1
   postcss: ^8.4.4
   postcss-load-config: ^3.1.0
-  prettier: ^2.5.0
   rollup: ^2.60.2
   sass: ^1.44.0
   stylelint: ^14.1.0
@@ -44,18 +42,16 @@ devDependencies:
   '@typescript-eslint/parser': 5.5.0_eslint@8.3.0+typescript@4.5.2
   autoprefixer: 10.4.0_postcss@8.4.4
   axios: 0.24.0
-  clipboard-copy: 4.0.1
   codemirror: 5.64.0
   eslint: 8.3.0
   eslint-config-google: 0.14.0_eslint@8.3.0
   eslint-plugin-html: 6.2.0
-  eslint-plugin-prettier: 4.0.0_eslint@8.3.0+prettier@2.5.0
+  eslint-plugin-prettier: 4.0.0_eslint@8.3.0
   eslint-plugin-svelte3: 3.2.1_eslint@8.3.0+svelte@3.44.2
   gh-pages: 3.2.3
   immutability-helper: 3.1.1
   postcss: 8.4.4
   postcss-load-config: 3.1.0
-  prettier: 2.5.0
   rollup: 2.60.2
   sass: 1.44.0
   stylelint: 14.1.0
@@ -610,10 +606,6 @@ packages:
       source-map: 0.6.1
     dev: true
 
-  /clipboard-copy/4.0.1:
-    resolution: {integrity: sha512-wOlqdqziE/NNTUJsfSgXmBMIrYmfd5V0HCGsR8uAKHcg+h9NENWINcfRjtWGU77wDHC8B8ijV4hMTGYbrKovng==}
-    dev: true
-
   /clone-regexp/2.2.0:
     resolution: {integrity: sha512-beMpP7BOtTipFuW8hrJvREQ2DrRu3BE7by0ZpibtfBA+qfHYvMGTc2Yb1JMYPKg/JUw0CHYvpg796aNTSW9z7Q==}
     engines: {node: '>=6'}
@@ -1038,7 +1030,7 @@ packages:
       htmlparser2: 7.2.0
     dev: true
 
-  /eslint-plugin-prettier/4.0.0_eslint@8.3.0+prettier@2.5.0:
+  /eslint-plugin-prettier/4.0.0_eslint@8.3.0:
     resolution: {integrity: sha512-98MqmCJ7vJodoQK359bqQWaxOE0CS8paAz/GgjaZLyex4TTk3g9HugoO89EqWCrFiOqn9EVvcoo7gZzONCWVwQ==}
     engines: {node: '>=6.0.0'}
     peerDependencies:
@@ -1050,7 +1042,6 @@ packages:
         optional: true
     dependencies:
       eslint: 8.3.0
-      prettier: 2.5.0
       prettier-linter-helpers: 1.0.0
     dev: true
 
@@ -2145,12 +2136,6 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       fast-diff: 1.2.0
-    dev: true
-
-  /prettier/2.5.0:
-    resolution: {integrity: sha512-FM/zAKgWTxj40rH03VxzIPdXmj39SwSjwG0heUcNFwI+EMZJnY93yAiKXM3dObIKAM5TA88werc8T/EwhB45eg==}
-    engines: {node: '>=10.13.0'}
-    hasBin: true
     dev: true
 
   /progress/2.0.3:
