@@ -1,3 +1,8 @@
+const tailwindcssNesting = require('tailwindcss/nesting')
+const tailwindcss = require('tailwindcss')
+const autoprefixer = require('autoprefixer')
+const cssnano = require('cssnano')
+
 module.exports = {
   mode: "jit",
   content: ["./src/app.html", "./src/**/*.{svelte,js,ts,jsx,tsx}"],
@@ -12,5 +17,13 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    tailwindcssNesting,
+    tailwindcss,
+    autoprefixer,
+    process.env.NODE_ENV == "production" &&
+    cssnano({
+      preset: 'default'
+    })
+  ],
 };

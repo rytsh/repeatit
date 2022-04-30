@@ -1,8 +1,9 @@
 import { minify } from "html-minifier";
+import type { Options as minifyOptions } from "html-minifier";
 import { prerendering } from "$app/env";
 const repeatitVersion = import.meta.env.VITE_REPEATIT_VERSION;
 
-const minificationOptions = {
+const minificationOptions: minifyOptions = {
   collapseBooleanAttributes: true,
   collapseWhitespace: true,
   conservativeCollapse: true,
