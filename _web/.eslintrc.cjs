@@ -8,7 +8,7 @@ module.exports = {
   parserOptions: {
     "tsconfigRootDir": __dirname,
     "project": ["./tsconfig.json"],
-    "extraFileExtensions": [".svelte", ".html"],
+    "extraFileExtensions": [".svelte", ".html", ".mts"],
   },
   extends: [
     "eslint:recommended",
@@ -42,5 +42,6 @@ module.exports = {
     "max-len": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "spaced-comment": ["error", "always", { "markers": ["/"] }],
+    "valid-jsdoc": "off",
   },
 };

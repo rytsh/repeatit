@@ -20,6 +20,7 @@ specifiers:
   gh-pages: ^3.2.3
   html-minifier: ^4.0.0
   immutability-helper: ^3.1.1
+  node-inject-html: ^0.0.5
   postcss: ^8.4.12
   postcss-load-config: ^3.1.4
   sass: ^1.51.0
@@ -55,6 +56,7 @@ devDependencies:
   gh-pages: 3.2.3
   html-minifier: 4.0.0
   immutability-helper: 3.1.1
+  node-inject-html: 0.0.5
   postcss: 8.4.13
   postcss-load-config: 3.1.4_postcss@8.4.13
   sass: 1.51.0
@@ -1986,6 +1988,10 @@ packages:
       minimist: 1.2.5
     dev: true
 
+  /moo/0.5.1:
+    resolution: {integrity: sha512-I1mnb5xn4fO80BH9BLcF0yLypy2UKl+Cb01Fu0hJRkJjlCRtxZMWkTdAtDd5ZqCOxtCkhmRwyI57vWT+1iZ67w==}
+    dev: true
+
   /mri/1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
     engines: {node: '>=4'}
@@ -2014,6 +2020,12 @@ packages:
     resolution: {integrity: sha512-rmTZ9kz+f3rCvK2TD1Ue/oZlns7OGoIWP4fc3llxxRXlOkHKoWPPWJOfFYpITabSow43QJbRIoHQXtt10VldyQ==}
     dependencies:
       lower-case: 1.1.4
+    dev: true
+
+  /node-inject-html/0.0.5:
+    resolution: {integrity: sha512-YUjHKq6sjD5rru/lqxQ0BHLvgJP33T54/ehsxgi1sShUkA5cU+Kb/eZ8UnbjaZeKxueA5D75vwAmyc+B5Kof1Q==}
+    dependencies:
+      moo: 0.5.1
     dev: true
 
   /node-releases/2.0.4:
