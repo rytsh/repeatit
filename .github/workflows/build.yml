@@ -13,7 +13,7 @@ jobs:
       - name: build wasm
         run: |
           ./build.sh --build --tag ${{github.ref_name}}
-          tar -cvf wasm.tar _web/.env _web/public/wasm/repeatit.wasm
+          tar -cvf wasm.tar _web/.env _web/static/wasm/repeatit.wasm
       - name: Upload Artifact WASM
         uses: actions/upload-artifact@v2
         with:
