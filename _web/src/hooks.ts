@@ -1,5 +1,6 @@
 import { minify } from "html-minifier";
 import { prerendering } from "$app/env";
+const repeatitVersion = import.meta.env.VITE_REPEATIT_VERSION;
 
 const minificationOptions = {
   collapseBooleanAttributes: true,
@@ -42,9 +43,14 @@ export async function handle({ event, resolve }) {
 
   if (prerendering && response.headers.get("content-type") === "text/html") {
     console.log("> Prerendering hook function called");
+    let tx = await response.text();
+    if (repeatitVersion != "test") {
+      tx = injectFn(tx);
+    }
+
     return new Response(
       minify(
-        injectFn(await response.text()),
+        tx,
         minificationOptions
       ),
       {
