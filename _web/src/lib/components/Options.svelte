@@ -4,10 +4,10 @@
     convertFunctions,
     convertTemplates,
     uiConfig,
-  } from "@/store";
+  } from "@/lib/store";
   import { onMount } from "svelte";
   import update from "immutability-helper";
-  import { versions } from "@/store/versions";
+  import { versions } from "@/lib/store/versions";
 
   let htmlSettings: HTMLDivElement;
 

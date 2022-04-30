@@ -1,4 +1,4 @@
-import { codes, convertConfig } from "@/store";
+import { codes, convertConfig } from "@/lib/store";
 import { get } from "svelte/store";
 
 import update from "immutability-helper";

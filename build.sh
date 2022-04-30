@@ -41,7 +41,7 @@ if [[ "$1" == '--' ]]; then shift; fi
 
 if [[ "$R_BUILD" == "Y" ]]; then
   echo "Building..."
-  GOOS=js GOARCH=wasm go build -ldflags="-s -w" -o ./_web/public/wasm/repeatit.wasm ./cmd/jsgo/main.go
+  GOOS=js GOARCH=wasm go build -ldflags="-s -w" -o ./_web/static/wasm/repeatit.wasm ./cmd/jsgo/main.go
 fi
 
 if [[ "$R_BUILD" == "Y" ]]; then
@@ -49,7 +49,9 @@ if [[ "$R_BUILD" == "Y" ]]; then
   grep github.com/Masterminds/sprig/v3 go.mod | cut -d " " -f3 | xargs -I{} echo VITE_SPRIG_VERSION={} > _web/.env
   go version | cut -d " " -f3- | xargs -I{} echo VITE_GO_VERSION="GOOS=js GOARCH=wasm {}" >> _web/.env
 
-  if [[ -n "$R_TAG" ]]; then
-    echo VITE_REPEATIT_VERSION="${R_TAG##*/}" >> _web/.env
+  if [[ -z "$R_TAG" ]]; then
+    R_TAG="test"
   fi
+
+  echo VITE_REPEATIT_VERSION="${R_TAG##*/}" >> _web/.env
 fi

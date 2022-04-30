@@ -1,4 +1,5 @@
-import { loading } from "@/store";
+import { loading } from "@/lib/store";
+import "./wasm_exec.js";
 
 const initWasm = (wasmFile = "./wasm/repeatit.wasm") => {
   if (!WebAssembly.instantiateStreaming) { // polyfill

@@ -1,4 +1,4 @@
-import { fullScreenKeys } from "@/helper/code";
+import { fullScreenKeys } from "@/lib/helper/code";
 import { writable } from "svelte/store";
 
 const initialEditorConfig: CodeMirror.EditorConfiguration = {

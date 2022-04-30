@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { codeTheme } from "@/store";
-
-  import Icon from "@/ui/Icon.svelte";
   import { onMount } from "svelte";
+  import { browser } from "$app/env";
+  import { codeTheme } from "@/lib/store";
+
+  import Icon from "@/lib/ui/Icon.svelte";
 
   let className = "";
   export { className as class };
@@ -10,8 +11,12 @@
   let darkMode = false;
 
   // get theme
-  const userTheme = localStorage.getItem("theme");
-  const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  let userTheme = "";
+  let systemTheme = false;
+  if (browser) {
+    userTheme = localStorage.getItem("theme");
+    systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
 
   // initial theme
   const themeCheck = () => {

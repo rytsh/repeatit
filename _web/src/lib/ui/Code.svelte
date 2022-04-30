@@ -1,11 +1,12 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { codes, codesKeys, codeTheme, editorConfig } from "@/store";
+  import { codes, codeTheme, editorConfig } from "@/lib/store";
+  import type { codesKeys } from "@/lib/store";
   import update from "immutability-helper";
 
-  import CodeMirror from "codemirror";
-  import Icon from "@/ui/Icon.svelte";
-  import { copyClip } from "@/helper/copy";
+  import type { Editor } from "codemirror";
+  import Icon from "@/lib/ui/Icon.svelte";
+  import { copyClip } from "@/lib/helper/copy";
 
   let code: HTMLElement;
 
@@ -23,7 +24,7 @@
   let err = false;
   let success = false;
 
-  let editor: CodeMirror.Editor;
+  let editor: Editor;
   let copied = false;
 
   const copy = () => {
@@ -46,7 +47,8 @@
     editor && setTheme($codeTheme);
   }
 
-  onMount(() => {
+  onMount(async () => {
+    const { default: CodeMirror } = await import("codemirror");
     editor = CodeMirror(code, {
       ...$editorConfig,
       placeholder: `${placeholder}`,

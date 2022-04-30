@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { IconTypes } from "@/helper/icons";
+  import { IconTypes } from "@/lib/helper/icons";
 
   type IconTypesString = keyof typeof IconTypes;
 

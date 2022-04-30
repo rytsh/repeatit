@@ -2,6 +2,8 @@
 
 Go template playground with wasm.
 
+Frontend developed with __sveltekit__ with prerender mode.
+
 ## Features
 
 __-__ switch html and text  

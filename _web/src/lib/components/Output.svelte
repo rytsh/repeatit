@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Code from "@/ui/Code.svelte";
+  import Code from "@/lib/ui/Code.svelte";
 
   let className = "";
   export { className as class };

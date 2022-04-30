@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { repeatitVersion } from "@/store/versions";
+  import { repeatitVersion } from "@/lib/store/versions";
 </script>
 
 <div

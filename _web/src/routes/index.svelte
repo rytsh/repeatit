@@ -1,14 +1,17 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  import Input from "./components/Input.svelte";
-  import NavBar from "./components/NavBar.svelte";
-  import Options from "./components/Options.svelte";
-  import Output from "./components/Output.svelte";
-  import Template from "./components/Template.svelte";
-  import FootBar from "./components/FootBar.svelte";
+  import Input from "@/lib/components/Input.svelte";
+  import NavBar from "@/lib/components/NavBar.svelte";
+  import Options from "@/lib/components/Options.svelte";
+  import Output from "@/lib/components/Output.svelte";
+  import Template from "@/lib/components/Template.svelte";
+  import FootBar from "@/lib/components/FootBar.svelte";
+  import { browser } from "$app/env";
 
-  import "@/helper/init";
+  if (browser) {
+    import("@/lib/helper/init");
+  }
 
   let inputHeight: string;
 

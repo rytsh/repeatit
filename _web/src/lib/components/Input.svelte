@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { moveElement } from "@/helper/drag";
+  import { moveElement } from "@/lib/helper/drag";
 
-  import Code from "@/ui/Code.svelte";
+  import Code from "@/lib/ui/Code.svelte";
   import { onMount } from "svelte";
 
   let className = "";
