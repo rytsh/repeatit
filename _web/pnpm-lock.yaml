@@ -1,9 +1,9 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@sveltejs/adapter-auto': next
-  '@sveltejs/adapter-static': next
-  '@sveltejs/kit': next
+  '@sveltejs/adapter-auto': ^1.0.0-next.40
+  '@sveltejs/adapter-static': ^1.0.0-next.29
+  '@sveltejs/kit': ^1.0.0-next.324
   '@tsconfig/svelte': ^3.0.0
   '@types/codemirror': ^5.60.5
   '@types/golang-wasm-exec': ^1.15.0
@@ -404,7 +404,7 @@ packages:
     dependencies:
       '@typescript-eslint/types': 5.21.0
       '@typescript-eslint/visitor-keys': 5.21.0
-      debug: 4.3.3
+      debug: 4.3.4
       globby: 11.0.4
       is-glob: 4.0.3
       semver: 7.3.5
