@@ -43,5 +43,6 @@ module.exports = {
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "spaced-comment": ["error", "always", { "markers": ["/"] }],
     "valid-jsdoc": "off",
+    "operator-linebreak": "off",
   },
 };

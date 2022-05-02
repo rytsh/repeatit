@@ -7,5 +7,9 @@
 @import 'codemirror/theme/monokai.css';
 
 .CodeMirror pre.CodeMirror-placeholder {
-  @apply text-gray-400;
+  @apply text-neutral-400;
+}
+
+.CodeMirror-gutters div {
+  @apply border-r border-neutral-400;
 }

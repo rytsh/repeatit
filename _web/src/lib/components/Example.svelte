@@ -1,10 +1,11 @@
 <script lang="ts">
   import { get } from "svelte/store";
   import { location, push } from "svelte-spa-router";
-  import { codes } from "@/lib/store";
+  import { codes, convertConfig } from "@/lib/store";
   import examples from "@/examples";
   import update from "immutability-helper";
   import { browser } from "$app/env";
+  import { run } from "@/lib/helper/run";
 
   let firstLocation = "";
   let selected = "";
@@ -20,6 +21,8 @@
       return;
     }
 
+    push(`/${v}`);
+
     const values = examples.get(v);
     codes.update((v) =>
       update(v, {
@@ -27,10 +30,15 @@
         input: { $set: values.input },
         output: { $set: "" },
         trigger: { $set: !v.trigger },
+        error: { $set: false },
+        success: { $set: false },
       })
     );
 
-    push(`/${v}`);
+    // live update
+    if ($convertConfig.options.has("live")) {
+      run();
+    }
   };
 
   $: changeSelected(selected);

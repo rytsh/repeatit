@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { codes, codeTheme, editorConfig } from "@/lib/store";
+  import { codes, codeTheme, convertConfig, editorConfig } from "@/lib/store";
   import type { codesKeys } from "@/lib/store";
   import update from "immutability-helper";
 
@@ -27,6 +27,8 @@
   let editor: Editor;
   let copied = false;
 
+  export let liveFunc: () => void = null;
+
   const copy = () => {
     copyClip(editor.getValue()).then(
       () => {
@@ -48,7 +50,7 @@
   }
 
   onMount(async () => {
-    const { default: CodeMirror } = await import("codemirror");
+    const CodeMirror = (await import("codemirror")).default;
     editor = CodeMirror(code, {
       ...$editorConfig,
       placeholder: `${placeholder}`,
@@ -73,6 +75,10 @@
       trigger = v.trigger;
 
       value = v[watchCode];
+      const getValue = editor.getValue();
+      if (getValue == value) {
+        return;
+      }
       editor.setValue(value);
     });
 
@@ -90,6 +96,11 @@
           triggerError: { $set: !v.triggerError },
         })
       );
+
+      // live update
+      if (liveFunc && $convertConfig.options.has("live")) {
+        liveFunc();
+      }
     });
   });
 </script>
@@ -97,13 +108,17 @@
 <div class={`flex min-h-full h-full w-full ${className}`}>
   <div class="flex-1 grid h-full grid-rows-[auto_1fr]">
     <div
-      class={`px-1 bg-gray-100 dark:bg-gray-400 border-b border-gray-200 dark:border-gray-600 flex flex-row items-center justify-between ${
-        err ? "!bg-red-400 !dark:bg-red-400" : ""
-      } ${success ? "!bg-green-300 !dark:bg-green-300" : ""}`}
+      class={`px-1 bg-neutral-100 dark:bg-neutral-800 dark:text-neutral-300 border-b border-neutral-200 dark:border-neutral-600 flex flex-row items-center justify-between ${
+        err ? "!bg-red-400 !dark:bg-red-400 !text-neutral-800" : ""
+      } ${success ? "!bg-green-300 !dark:bg-green-300 !text-neutral-800" : ""}`}
     >
       <span class="truncate">{title}</span>
       <button
-        class="text-white font-bold py-2 h-full flex items-center fill-gray-600 dark:fill-gray-900 hover:fill-gray-800 dark:hover:fill-gray-100"
+        class={`text-white font-bold py-2 h-full flex items-center fill-neutral-600 ${
+          err || success
+            ? "dark:fill-neutral-600 dark:hover:fill-neutral-800"
+            : "dark:fill-neutral-300 dark:hover:fill-neutral-100"
+        } hover:fill-neutral-800`}
         on:click={copy}
         title={copied ? "copied" : "copy to clipboard"}
       >

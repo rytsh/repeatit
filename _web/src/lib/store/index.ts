@@ -40,10 +40,12 @@ export const codes = writable(initialCodes);
 // Convert settings
 export const convertTemplates = ["text", "html"];
 export const convertFunctions = ["sprig"];
+export const options = ["live"];
 
 const initialConvertConfig = {
   template: "text" as typeof convertTemplates[number],
-  functions: new Set(["sprig"]),
+  functions: new Set(convertFunctions),
+  options: new Set(options),
 };
 
 export const convertConfig = writable(initialConvertConfig);

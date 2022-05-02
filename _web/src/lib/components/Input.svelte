@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { moveElement } from "@/lib/helper/drag";
-
-  import Code from "@/lib/ui/Code.svelte";
   import { onMount } from "svelte";
+  import Code from "@/lib/ui/Code.svelte";
+  import { moveElement } from "@/lib/helper/drag";
+  import { run } from "@/lib/helper/run";
 
   let className = "";
   let height = "";
@@ -44,6 +44,7 @@
     class="pb-1"
     watchCode="input"
     placeholder={"null\n\n# F11 to toggle fullscreen"}
+    liveFunc={run}
   />
   <span bind:this={moveLine} class="drag-line-bottom" />
 </div>

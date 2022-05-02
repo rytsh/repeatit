@@ -1,3 +1,7 @@
+<script lang="ts">
+  import "../app.scss";
+</script>
+
 <svelte:head>
   <title>Go Template Playground</title>
   <meta charset="utf-8" />
@@ -25,7 +29,3 @@
 </svelte:head>
 
 <slot />
-
-<style lang="scss" global>
-  @import "../app.scss";
-</style>

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { moveElement } from "@/lib/helper/drag";
-
-  import Code from "@/lib/ui/Code.svelte";
   import { onMount } from "svelte";
+  import Code from "@/lib/ui/Code.svelte";
+  import { moveElement } from "@/lib/helper/drag";
+  import { run } from "@/lib/helper/run";
 
   let className = "";
   let width = 0;
@@ -58,7 +58,12 @@
   bind:clientWidth={moveTargetWidth}
   bind:clientHeight={moveTargetHeight}
 >
-  <Code title="Template" class="sm-max:pb-1 sm:pr-1" watchCode="template" />
+  <Code
+    title="Template"
+    class="sm-max:pb-1 sm:pr-1"
+    watchCode="template"
+    liveFunc={run}
+  />
   <span bind:this={moveLineWidth} class="sm-max:hidden drag-line-right" />
   <span bind:this={moveLineHeight} class="sm:hidden drag-line-bottom" />
 </div>

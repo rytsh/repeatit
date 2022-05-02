@@ -3,7 +3,7 @@
 </script>
 
 <div
-  class="bg-gray-200 dark:bg-gray-400 border-t border-gray-300 dark:border-slate-600 px-2 text-sm"
+  class="bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-300 border-t border-neutral-300 dark:border-neutral-600 px-2 text-sm"
 >
-  <span class="float-right">{repeatitVersion}</span>
+  <span class="float-right">repeatit {repeatitVersion}</span>
 </div>
