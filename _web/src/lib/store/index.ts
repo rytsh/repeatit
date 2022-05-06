@@ -20,7 +20,7 @@ export const editorConfig = writable(initialEditorConfig);
 export const loading = writable(true);
 
 // Loading
-export const codeTheme = writable("default");
+export const codeTheme = writable("light");
 
 // Codes
 const initialCodes = {

@@ -47,9 +47,9 @@
   // set code theme
   const setTheme = (m: boolean) => {
     if (m) {
-      codeTheme.set("monokai");
+      codeTheme.set("dark");
     } else {
-      codeTheme.set("default");
+      codeTheme.set("light");
     }
   };
 

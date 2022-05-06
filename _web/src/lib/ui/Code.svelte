@@ -12,6 +12,7 @@
 
   export let title = "title";
   export let placeholder = "# F11 to toggle fullscreen";
+  export let mode = undefined as string;
   let className = "";
   export { className as class };
 
@@ -54,6 +55,7 @@
     editor = CodeMirror(code, {
       ...$editorConfig,
       placeholder: `${placeholder}`,
+      mode: mode ?? $editorConfig.mode,
     });
     editor.setSize("100%", "100%");
     editor.setOption("theme", $codeTheme);

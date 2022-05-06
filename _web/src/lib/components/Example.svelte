@@ -1,7 +1,7 @@
 <script lang="ts">
   import { get } from "svelte/store";
   import { location, push } from "svelte-spa-router";
-  import { codes, convertConfig } from "@/lib/store";
+  import { codes, convertConfig, loading } from "@/lib/store";
   import examples from "@/examples";
   import update from "immutability-helper";
   import { browser } from "$app/env";
@@ -35,13 +35,27 @@
       })
     );
 
+    runIt();
+  };
+
+  const runIt = () => {
     // live update
     if ($convertConfig.options.has("live")) {
       run();
     }
   };
 
+  const loadFinish = (l: boolean) => {
+    if (l) {
+      return;
+    }
+
+    runIt();
+  };
+
   $: changeSelected(selected);
+
+  $: loadFinish($loading);
 </script>
 
 <select

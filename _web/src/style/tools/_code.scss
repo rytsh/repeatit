@@ -4,12 +4,7 @@
 @import 'codemirror/lib/codemirror.css';
 @import 'codemirror/addon/lint/lint.css';
 @import 'codemirror/addon/display/fullscreen.css';
-@import 'codemirror/theme/monokai.css';
 
 .CodeMirror pre.CodeMirror-placeholder {
   @apply text-neutral-400;
-}
-
-.CodeMirror-gutters div {
-  @apply border-r border-neutral-400;
 }

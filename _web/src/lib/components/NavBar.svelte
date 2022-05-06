@@ -11,9 +11,7 @@
   export { className as class };
 </script>
 
-<div
-  class={`bg-yellow-200 dark:bg-green-300 flex items-center justify-between ${className}`}
->
+<div class={`bg-yellow-200 flex items-center justify-between ${className}`}>
   <div class="flex-grow flex items-center self-stretch">
     <button
       class="flex items-center h-full text-lg font-semibold p-1 pr-5 bg-transparent text-black hover:bg-green-500 hover:text-gray-100 fill-gray-600 hover:fill-white"
