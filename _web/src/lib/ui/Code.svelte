@@ -30,6 +30,9 @@
 
   export let liveFunc: () => void = null;
 
+  export let output = false;
+  let html = '';
+
   const copy = () => {
     copyClip(editor.getValue()).then(
       () => {
@@ -82,6 +85,7 @@
         return;
       }
       editor.setValue(value);
+      html = value;
     });
 
     editor.on("change", () => {
@@ -131,6 +135,9 @@
         {/if}
       </button>
     </div>
-    <code bind:this={code} class="overflow-auto" />
+    <code bind:this={code} class="overflow-auto" style="{output ? `display:none;` : ''}"/>
+    {#if output}
+      <div>{@html html}</div>
+    {/if}
   </div>
 </div>

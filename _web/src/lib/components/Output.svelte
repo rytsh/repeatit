@@ -6,5 +6,5 @@
 </script>
 
 <div class={className}>
-  <Code title="Output" watchCode="output" watchErr={true} />
+  <Code title="Output" watchCode="output" watchErr={true} output={true} />
 </div>
