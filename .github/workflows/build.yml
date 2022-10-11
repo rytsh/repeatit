@@ -7,7 +7,7 @@ jobs:
   backend:
     runs-on: ubuntu-latest
     container:
-      image: golang:1.18.1
+      image: golang:1.18.7
     steps:
       - uses: actions/checkout@v2
       - name: build wasm
@@ -24,7 +24,7 @@ jobs:
     needs: backend
     runs-on: ubuntu-latest
     container:
-      image: rytsh/frontend-pnpm:v0.0.3
+      image: rytsh/frontend-pnpm:v0.0.4
     steps:
       - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2

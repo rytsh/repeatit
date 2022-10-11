@@ -37,7 +37,7 @@ const injectFn = (s: string) => {
 
 /** @type {import('@sveltejs/kit').Handle} */
 export async function handle({ event, resolve }) {
-  const response = await resolve(event);
+  const response = await resolve(event, { ssr: false });
   if (process.env.npm_lifecycle_event != "build") {
     return response;
   }

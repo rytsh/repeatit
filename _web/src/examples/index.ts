@@ -6,7 +6,7 @@ interface IExample {
   input: string;
 }
 
-const convert = (v: {template: string, input: string}) => {
+const convert = (v: { template: string, input: string }) => {
   return {
     template: v.template,
     input: v.input,
@@ -19,3 +19,5 @@ examples.set(hello.name, convert(hello));
 examples.set(planet.name, convert(planet));
 
 export default examples;
+
+export type { IExample };

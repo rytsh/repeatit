@@ -7,11 +7,7 @@
   import Output from "@/lib/components/Output.svelte";
   import Template from "@/lib/components/Template.svelte";
   import FootBar from "@/lib/components/FootBar.svelte";
-  import { browser } from "$app/env";
-
-  if (browser) {
-    import("@/lib/helper/init");
-  }
+  import "@/lib/helper/init";
 
   let inputHeight: string;
 

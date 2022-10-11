@@ -1,29 +1,31 @@
 <script lang="ts">
   import { get } from "svelte/store";
   import { location, push } from "svelte-spa-router";
-  import { codes, convertConfig, loading } from "@/lib/store";
+  import { codes } from "@/lib/store";
   import examples from "@/examples";
   import update from "immutability-helper";
-  import { browser } from "$app/env";
-  import { run } from "@/lib/helper/run";
+  import { runIt } from "@/lib/helper/load";
+
+  const exampleURL = "/example/";
 
   let firstLocation = "";
   let selected = "";
 
-  if (browser) {
-    firstLocation = get(location);
-    selected = firstLocation == "/" ? "" : firstLocation.split("/")[1];
+  firstLocation = get(location);
+  if (firstLocation.startsWith(exampleURL)) {
+    selected = firstLocation.replace(exampleURL, "");
   }
 
-  const changeSelected = (v) => {
-    if (!v) {
-      browser && window.history.pushState(null, null, "/");
+  const changeSelected = (vSelected: string) => {
+    if (!vSelected) {
       return;
     }
 
-    push(`/${v}`);
+    push(exampleURL + vSelected);
 
-    const values = examples.get(v);
+    const values = examples.get(vSelected);
+    if (!values) return;
+
     codes.update((v) =>
       update(v, {
         template: { $set: values.template },
@@ -38,24 +40,7 @@
     runIt();
   };
 
-  const runIt = () => {
-    // live update
-    if ($convertConfig.options.has("live")) {
-      run();
-    }
-  };
-
-  const loadFinish = (l: boolean) => {
-    if (l) {
-      return;
-    }
-
-    runIt();
-  };
-
   $: changeSelected(selected);
-
-  $: loadFinish($loading);
 </script>
 
 <select
