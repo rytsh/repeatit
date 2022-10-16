@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { afterUpdate, onMount } from "svelte";
   import { codes, codeTheme, convertConfig, editorConfig } from "@/lib/store";
   import type { codesKeys } from "@/lib/store";
   import update from "immutability-helper";
@@ -13,6 +13,7 @@
   export let title = "title";
   export let placeholder = "# F11 to toggle fullscreen";
   export let mode = undefined as string;
+  export let show = "code";
   let className = "";
   export { className as class };
 
@@ -29,6 +30,7 @@
   let copied = false;
 
   export let liveFunc: () => void = null;
+  export let getResult: (v: any) => void = null;
 
   const copy = () => {
     copyClip(editor.getValue()).then(
@@ -49,6 +51,16 @@
   $: {
     editor && setTheme($codeTheme);
   }
+
+  // const refreshCode = (_: string) => {
+  //   editor && editor.refresh();
+  // };
+
+  // $: refreshCode(show);
+
+  afterUpdate(() => {
+    editor && editor.refresh();
+  });
 
   onMount(async () => {
     const CodeMirror = (await import("codemirror")).default;
@@ -82,6 +94,11 @@
         return;
       }
       editor.setValue(value);
+
+      // get result
+      if (getResult) {
+        getResult(value);
+      }
     });
 
     editor.on("change", () => {
@@ -114,13 +131,16 @@
         err ? "!bg-red-400 !dark:bg-red-400 !text-neutral-800" : ""
       } ${success ? "!bg-green-300 !dark:bg-green-300 !text-neutral-800" : ""}`}
     >
-      <span class="truncate">{title}</span>
+      <div class="h-full">
+        <span class="truncate leading-10">{title}</span>
+        <slot name="title" />
+      </div>
       <button
-        class={`text-white font-bold py-2 h-full flex items-center fill-neutral-600 ${
+        class={`text-white font-bold py-2 h-full flex items-center  ${
           err || success
-            ? "dark:fill-neutral-600 dark:hover:fill-neutral-800"
-            : "dark:fill-neutral-300 dark:hover:fill-neutral-100"
-        } hover:fill-neutral-800`}
+            ? "fill-neutral-700 hover:fill-white"
+            : "fill-neutral-500 hover:fill-neutral-900 dark:hover:fill-yellow-200"
+        }`}
         on:click={copy}
         title={copied ? "copied" : "copy to clipboard"}
       >
@@ -131,6 +151,12 @@
         {/if}
       </button>
     </div>
-    <code bind:this={code} class="overflow-auto" />
+    <code
+      bind:this={code}
+      class={`overflow-auto ${show == "code" ? "" : "hidden"}`}
+    />
+    <div class={`${show == "show" ? "" : "hidden"}`}>
+      <slot name="show" />
+    </div>
   </div>
 </div>

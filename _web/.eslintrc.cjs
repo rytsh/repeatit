@@ -44,5 +44,6 @@ module.exports = {
     "spaced-comment": ["error", "always", { "markers": ["/"] }],
     "valid-jsdoc": "off",
     "operator-linebreak": "off",
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
   },
 };

@@ -1,5 +1,6 @@
 import { hello } from "./hello";
 import { planet } from "./planet";
+import { tailwind } from "./tailwind";
 
 interface IExample {
   template: string;
@@ -17,6 +18,7 @@ const examples = new Map<string, IExample>();
 
 examples.set(hello.name, convert(hello));
 examples.set(planet.name, convert(planet));
+examples.set(tailwind.name, convert(tailwind));
 
 export default examples;
 
