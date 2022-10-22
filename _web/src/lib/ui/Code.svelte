@@ -52,12 +52,6 @@
     editor && setTheme($codeTheme);
   }
 
-  // const refreshCode = (_: string) => {
-  //   editor && editor.refresh();
-  // };
-
-  // $: refreshCode(show);
-
   afterUpdate(() => {
     editor && editor.refresh();
   });

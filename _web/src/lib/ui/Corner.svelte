@@ -11,6 +11,7 @@
   {href}
   class={classNames.join(" ")}
   target="_blank"
+  rel="noreferrer"
   aria-label="View source on GitHub"
   ><svg
     height="100%"

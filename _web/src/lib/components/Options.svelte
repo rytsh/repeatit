@@ -108,6 +108,7 @@
       <a
         href={link}
         target="_blank"
+        rel="noreferrer"
         class="block hover:bg-yellow-200 hover:underline px-1"
       >
         <span class="w-14 inline-block">{name}</span>

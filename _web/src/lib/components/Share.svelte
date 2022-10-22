@@ -6,15 +6,18 @@
   import { runIt } from "@/lib/helper/load";
   import { loadHash, saveHash } from "../helper/share";
   import { copyClip } from "../helper/copy";
+  import { browser } from "$app/environment";
 
   const shareURL = "/share/";
 
   let firstLocation = "";
   let hashCode = "";
 
-  firstLocation = get(location);
-  if (firstLocation.startsWith(shareURL)) {
-    hashCode = firstLocation.replace(shareURL, "");
+  if (browser) {
+    firstLocation = get(location);
+    if (firstLocation.startsWith(shareURL)) {
+      hashCode = firstLocation.replace(shareURL, "");
+    }
   }
 
   const readShare = (vHash: string) => {

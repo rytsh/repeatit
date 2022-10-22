@@ -1,6 +1,6 @@
 import { minify } from "html-minifier";
 import type { Options as minifyOptions } from "html-minifier";
-import { prerendering } from "$app/env";
+import { prerendering } from "$app/environment";
 const repeatitVersion = import.meta.env.VITE_REPEATIT_VERSION;
 
 const minificationOptions: minifyOptions = {
@@ -37,7 +37,7 @@ const injectFn = (s: string) => {
 
 /** @type {import('@sveltejs/kit').Handle} */
 export async function handle({ event, resolve }) {
-  const response = await resolve(event, { ssr: false });
+  const response = await resolve(event);
   if (process.env.npm_lifecycle_event != "build") {
     return response;
   }

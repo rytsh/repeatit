@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { codeTheme } from "@/lib/store";
+  import { browser } from "$app/environment";
 
   import Icon from "@/lib/ui/Icon.svelte";
 
@@ -12,8 +13,11 @@
   // get theme
   let userTheme = "";
   let systemTheme = false;
-  userTheme = localStorage.getItem("theme");
-  systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  if (browser) {
+    userTheme = localStorage.getItem("theme");
+    systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
 
   // initial theme
   const themeCheck = () => {

@@ -11,6 +11,8 @@ Frontend developed with __sveltekit__ in prerender mode.
 
 __-__ switch html and text  
 __-__ sprig functions
+__-__ html view
+__-__ share template and input
 
 <details><summary>Development</summary>
 

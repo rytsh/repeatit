@@ -5,15 +5,18 @@
   import examples from "@/examples";
   import update from "immutability-helper";
   import { runIt } from "@/lib/helper/load";
+  import { browser } from "$app/environment";
 
   const exampleURL = "/example/";
 
   let firstLocation = "";
   let selected = "";
 
-  firstLocation = get(location);
-  if (firstLocation.startsWith(exampleURL)) {
-    selected = firstLocation.replace(exampleURL, "");
+  if (browser) {
+    firstLocation = get(location);
+    if (firstLocation.startsWith(exampleURL)) {
+      selected = firstLocation.replace(exampleURL, "");
+    }
   }
 
   const changeSelected = (vSelected: string) => {

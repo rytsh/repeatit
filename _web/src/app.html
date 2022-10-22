@@ -2,13 +2,22 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="%svelte.assets%/logo.svg" />
+		<link rel="icon" type="image/svg+xml" href="%sveltekit.assets%/logo.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		%svelte.head%
+		%sveltekit.head%
 
     <!-- <%- analytics %> -->
 	</head>
-	<body>
-		%svelte.body%
+	<body data-sveltekit-prefetch>
+		%sveltekit.body%
 	</body>
+
+  <noscript class="flex justify-center items-center absolute top-0 left-0 w-full h-full bg-slate-600 bg-opacity-50">
+    <div class="bg-slate-600 w-full border-y border-black">
+      <div class="m-auto p-4 sm:w-3/4 bg-red-400">
+        <h1 class="text-2xl font-bold">JavaScript is disabled!</h1>
+        <p class="text-lg">This site requires JavaScript to function properly. Please enable JavaScript in your browser.</p>
+      </div>
+    </div>
+  </noscript>
 </html>
