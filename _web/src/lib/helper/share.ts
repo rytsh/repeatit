@@ -1,5 +1,11 @@
 import type { IExample } from "@/examples";
-import { Base64 } from 'js-base64';
+import { Base64 } from "js-base64";
+
+interface shareConfig {
+  title?: string;
+  text?: string;
+  url: string;
+}
 
 // base64 hash read
 const loadHash = (data: string) => {
@@ -12,4 +18,9 @@ const saveHash = (data: IExample) => {
   return Base64.encode(json);
 };
 
-export { loadHash, saveHash };
+const shareLink = (v: shareConfig) => {
+  navigator.share(v);
+};
+
+export { loadHash, saveHash, shareLink };
+export type { shareConfig };

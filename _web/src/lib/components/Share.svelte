@@ -4,8 +4,7 @@
   import { codes } from "@/lib/store";
   import update from "immutability-helper";
   import { runIt } from "@/lib/helper/load";
-  import { loadHash, saveHash } from "../helper/share";
-  import { copyClip } from "../helper/copy";
+  import { loadHash, saveHash, shareLink } from "@/lib/helper/share";
   import { browser } from "$app/environment";
 
   const shareURL = "/share/";
@@ -46,10 +45,14 @@
     const { template, input } = get(codes);
     const hash = saveHash({ template, input });
     push(shareURL + hash);
-    const shareLink =
+    const link =
       window.location.origin + window.location.pathname + "#" + shareURL + hash;
-    console.log(shareLink);
-    copyClip(shareLink);
+    console.log(link);
+    // copyClip(link);
+    shareLink({
+      title: "repeatit - go template playground",
+      url: link,
+    });
   };
 
   $: readShare(hashCode);
