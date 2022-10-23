@@ -83,7 +83,7 @@
 
 <div class="h-full min-h-full overflow-auto hidden sm:flex" bind:this={mGroup}>
   <div
-    class={"min-w-min [min-height:2.75rem]"}
+    class={"min-w-min [min-height:2.75rem] pr-1"}
     style={`position: relative; width: ${templateWidth}px;`}
     bind:this={templateTarget}
     bind:clientWidth={templateTargetWidth}
@@ -98,7 +98,7 @@
     bind:clientHeight={inOutMaxHeight}
   >
     <div
-      class={"min-w-min [min-height:2.75rem]"}
+      class={"min-w-min [min-height:2.75rem] pb-1"}
       style={`position: relative; height: ${inputHeight}`}
       bind:this={inputTarget}
       bind:clientHeight={inputTargetHeight}
