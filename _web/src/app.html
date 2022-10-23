@@ -2,11 +2,20 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
+		<meta id="vp" name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="%sveltekit.assets%/logo.svg" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      window.onload = function() {
+        if (screen.width < 512) {
+          document.getElementById("vp").setAttribute("content", "user-scalable=no,width=512");
+        }
+      };
+    </script>
+
 		%sveltekit.head%
 
     <!-- <%- analytics %> -->
+
 	</head>
 	<body data-sveltekit-prefetch>
 		%sveltekit.body%

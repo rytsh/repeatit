@@ -68,6 +68,8 @@
                 })
               );
             }
+
+            run();
           }
           break;
         case "template":
@@ -78,6 +80,8 @@
                 template: { $set: templateName },
               })
             );
+
+            run();
           }
           break;
 

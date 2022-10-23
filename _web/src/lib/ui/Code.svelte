@@ -147,9 +147,9 @@
     </div>
     <code
       bind:this={code}
-      class={`overflow-auto ${show == "code" ? "" : "hidden"}`}
+      class={`h-full overflow-auto ${show == "code" ? "" : "hidden"}`}
     />
-    <div class={`${show == "show" ? "" : "hidden"}`}>
+    <div class={`h-full ${show == "show" ? "" : "hidden"}`}>
       <slot name="show" />
     </div>
   </div>
