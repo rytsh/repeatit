@@ -1,39 +1,39 @@
 <script lang="ts">
   import Code from "@/lib/ui/Code.svelte";
+  import { fullScreenHTML, getConfig } from "@/lib/store";
+  import { getLink } from "@/lib/helper/share";
 
   let show = "code";
-  let sourceValue = "";
-
-  const result = (v: any) => {
-    sourceValue = v;
-  };
 </script>
 
-<Code
-  title="Output"
-  watchCode="output"
-  watchErr={true}
-  {show}
-  getResult={result}
->
-  <button
-    slot="title"
-    class="h-full px-3 ml-2 border-l border-neutral-300 dark:border-slate-600 hover:text-black hover:bg-yellow-200"
-    on:click|stopPropagation={() =>
-      show == "code" ? (show = "show") : (show = "code")}
-  >
-    {#if show == "code"}
-      <span>view HTML</span>
-    {:else}
-      <span>view TEXT</span>
+<Code title="Output" watchCode="output" watchErr={true} {show}>
+  <div slot="title" class="contents">
+    <button
+      class="h-full px-3 ml-2 border-l border-neutral-300 dark:border-slate-600 hover:text-black hover:bg-yellow-200"
+      on:click|stopPropagation={() =>
+        show == "code" ? (show = "show") : (show = "code")}
+    >
+      {#if show == "code"}
+        <span>View HTML</span>
+      {:else}
+        <span>View TEXT</span>
+      {/if}
+    </button>
+    {#if show == "show"}
+      <button
+        class="h-full pl-4 pr-3 border-l border-neutral-300 dark:border-slate-600 hover:text-black hover:bg-yellow-200"
+        title="full screen view and generate link"
+        on:click|stopPropagation={() => {
+          const config = getConfig();
+          config.fullScreenHTML = true;
+
+          const link = getLink(true, config);
+          console.log(link);
+          fullScreenHTML.set(true);
+        }}
+      >
+        <span>Full Screen</span>
+      </button>
     {/if}
-  </button>
-  <iframe
-    slot="show"
-    seamless
-    sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals"
-    srcdoc={sourceValue}
-    style="width:100%;height:100%"
-    title="view html"
-  />
+  </div>
 </Code>

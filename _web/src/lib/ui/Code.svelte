@@ -125,32 +125,41 @@
         err ? "!bg-red-400 !dark:bg-red-400 !text-neutral-800" : ""
       } ${success ? "!bg-green-300 !dark:bg-green-300 !text-neutral-800" : ""}`}
     >
-      <div class="h-full">
+      <div class="h-full flex">
         <span class="truncate leading-10">{title}</span>
         <slot name="title" />
       </div>
-      <button
-        class={`text-white font-bold py-2 h-full flex items-center  ${
-          err || success
-            ? "fill-neutral-700 hover:fill-white"
-            : "fill-neutral-500 hover:fill-neutral-900 dark:hover:fill-yellow-200"
-        }`}
-        on:click={copy}
-        title={copied ? "copied" : "copy to clipboard"}
-      >
-        {#if copied}
-          <Icon icon="tick" />
-        {:else}
-          <Icon icon="copy" />
-        {/if}
-      </button>
+      <div class="flex gap-2">
+        <slot name="actions" />
+        <button
+          class={`text-white font-bold py-2 h-full flex items-center  ${
+            err || success
+              ? "fill-neutral-700 hover:fill-white"
+              : "fill-neutral-500 hover:fill-neutral-900 dark:hover:fill-yellow-200"
+          }`}
+          on:click|stopPropagation={copy}
+          title={copied ? "copied" : "copy to clipboard"}
+        >
+          {#if copied}
+            <Icon icon="tick" />
+          {:else}
+            <Icon icon="copy" />
+          {/if}
+        </button>
+      </div>
     </div>
     <code
       bind:this={code}
       class={`h-full overflow-auto ${show == "code" ? "" : "hidden"}`}
     />
-    <div class={`h-full ${show == "show" ? "" : "hidden"}`}>
-      <slot name="show" />
-    </div>
+    {#if title == "Output" && show == "show"}
+      <iframe
+        seamless
+        sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals"
+        srcdoc={value}
+        style="width:100%;height:100%"
+        title="view html"
+      />
+    {/if}
   </div>
 </div>
