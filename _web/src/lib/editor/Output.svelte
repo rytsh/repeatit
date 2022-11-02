@@ -27,7 +27,7 @@
           const config = getConfig();
           config.fullScreenHTML = true;
 
-          const link = getLink(true, config);
+          const link = getLink(true, config, true);
           console.log(link);
           fullScreenHTML.set(true);
         }}

@@ -15,12 +15,12 @@
   import { codes, setConfig, fullScreenHTML } from "@/lib/store";
   import update from "immutability-helper";
   import { runIt } from "@/lib/helper/load";
-  import { loadHash, shareURL } from "@/lib/helper/share";
+  import { loadHash, shareURL, shareViewURL } from "@/lib/helper/share";
 
   let firstLocation = "";
   let hashCode = "";
 
-  const readShare = (vHash: string) => {
+  const readShare = (vHash: string, view: boolean) => {
     if (!vHash) {
       return;
     }
@@ -29,7 +29,11 @@
     if (!values) return;
 
     if (values.config) {
+      values.config.fullScreenHTML = view;
+
       setConfig(values.config);
+    } else {
+      fullScreenHTML.set(false);
     }
 
     codes.update((v) =>
@@ -50,9 +54,12 @@
     import("@/lib/helper/init");
 
     firstLocation = get(location);
-    if (firstLocation.startsWith(shareURL)) {
+    if (firstLocation.startsWith(shareViewURL)) {
+      hashCode = firstLocation.replace(shareViewURL, "");
+      readShare(hashCode, true);
+    } else if (firstLocation.startsWith(shareURL)) {
       hashCode = firstLocation.replace(shareURL, "");
-      readShare(hashCode);
+      readShare(hashCode, false);
     } else {
       fullScreenHTML.set(false);
     }
