@@ -53,6 +53,8 @@
     if (firstLocation.startsWith(shareURL)) {
       hashCode = firstLocation.replace(shareURL, "");
       readShare(hashCode);
+    } else {
+      fullScreenHTML.set(false);
     }
   }
 </script>
