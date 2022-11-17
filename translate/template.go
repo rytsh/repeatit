@@ -27,43 +27,39 @@ type Template struct {
 	HTML *htmlTemplate.Template
 }
 
-func (t Template) Ext(v map[string]interface{}, file string, templateType Tmp, funcList []string) ([]byte, error) {
+func (t Template) Ext(v any, file string, templateType Tmp, funcList []string) ([]byte, error) {
 	switch templateType {
 	case TXT:
-		funct := t.TXT
-
-		funct2, err := funct.Clone()
+		template, err := t.TXT.Clone()
 		if err != nil {
 			return nil, fmt.Errorf("clone text template error: %w", err)
 		}
 
 		for _, f := range funcList {
 			if f == "sprig" {
-				funct2 = funct2.Funcs(sprig.TxtFuncMap())
+				template = template.Funcs(sprig.TxtFuncMap())
 			}
 		}
 
-		tmp, err := funct2.Parse(file)
+		tmp, err := template.Parse(file)
 		if err != nil {
 			return nil, fmt.Errorf("parse text template error: %w", err)
 		}
 
 		return Execute(v, tmp)
 	case HTML:
-		funct := t.HTML
-
-		funct2, err := funct.Clone()
+		template, err := t.HTML.Clone()
 		if err != nil {
 			return nil, fmt.Errorf("clone html template error: %w", err)
 		}
 
 		for _, f := range funcList {
 			if f == "sprig" {
-				funct2 = funct2.Funcs(sprig.HtmlFuncMap())
+				template = template.Funcs(sprig.HtmlFuncMap())
 			}
 		}
 
-		tmp, err := funct2.Parse(file)
+		tmp, err := template.Parse(file)
 		if err != nil {
 			return nil, fmt.Errorf("parse html template error: %w", err)
 		}

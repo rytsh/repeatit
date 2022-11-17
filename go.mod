@@ -2,7 +2,10 @@ module github.com/rytsh/repeatit
 
 go 1.18
 
-require github.com/Masterminds/sprig/v3 v3.2.2
+require (
+	github.com/BurntSushi/toml v1.2.1
+	github.com/Masterminds/sprig/v3 v3.2.2
+)
 
 require (
 	github.com/Masterminds/goutils v1.1.1 // indirect

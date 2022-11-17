@@ -11,7 +11,13 @@ const run = async () => {
   if (render) {
     let output: string;
     try {
-      output = await render(values.input == "" ? "null" : values.input, values.template, config.template, [...config.functions.keys()].join(","));
+      output = await render(
+        values.input == "" ? "null" : values.input,
+        values.template,
+        config.template,
+        [...config.functions.keys()].join(","),
+        config.inputType,
+      );
     } catch (error) {
       codes.update((v) => update(v, {
         output: { $set: error.toString() },

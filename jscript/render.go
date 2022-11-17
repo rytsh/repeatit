@@ -35,9 +35,7 @@ func Render(this js.Value, args []js.Value) any {
 }
 
 func renderWithError(args []js.Value) (any, error) {
-	reader := strings.NewReader(args[0].String())
-
-	values, err := translate.Decode(reader)
+	values, err := translate.Decode(args[0].String(), args[4].String())
 	if err != nil {
 		return nil, errors.New("failed to decode input; " + err.Error())
 	}

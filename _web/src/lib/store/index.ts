@@ -42,10 +42,19 @@ export const convertTemplates = ["text", "html"];
 export const convertFunctions = ["sprig"];
 export const options = ["live"];
 
+enum inputTypes {
+  raw = "raw",
+  yaml = "yaml",
+  toml = "toml",
+}
+
+export const inputTypesValues = Object.values(inputTypes);
+
 const initialConvertConfig = {
   template: "text" as typeof convertTemplates[number],
   functions: new Set(convertFunctions),
   options: new Set(options),
+  inputType: inputTypes.yaml,
 };
 
 export type configType = {
@@ -53,16 +62,18 @@ export type configType = {
   functions: string[];
   options: string[];
   fullScreenHTML: boolean,
+  inputType?: inputTypes,
 };
 
 // convert config to json
 export const getConfig = () => {
-  const { template, functions, options } = get(convertConfig);
+  const { template, functions, options, inputType } = get(convertConfig);
   return {
     template,
     fullScreenHTML: get(fullScreenHTML),
     functions: Array.from(functions),
     options: Array.from(options),
+    inputType,
   } as configType;
 };
 
@@ -75,6 +86,7 @@ export const setConfig = (config: configType) => {
     template: config.template,
     functions: new Set(config.functions),
     options: new Set(config.options),
+    inputType: config.inputType ?? inputTypes.yaml,
   }));
 };
 

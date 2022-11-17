@@ -6,7 +6,7 @@ import (
 )
 
 // Execute executes the template with the given data.
-func Execute(v map[string]interface{}, tmp TemplateExecuter) ([]byte, error) {
+func Execute(v any, tmp TemplateExecuter) ([]byte, error) {
 	var b bytes.Buffer
 
 	// Execute the template and write the output to the buffer

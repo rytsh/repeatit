@@ -7,7 +7,7 @@ jobs:
   backend:
     runs-on: ubuntu-latest
     container:
-      image: golang:1.18.7
+      image: golang:1.18.8
     steps:
       - uses: actions/checkout@v2
       - name: build wasm
