@@ -46,7 +46,7 @@ fi
 
 if [[ "$R_BUILD" == "Y" ]]; then
   echo "Extracting env variables..."
-  grep github.com/Masterminds/sprig/v3 go.mod | cut -d " " -f3 | xargs -I{} echo VITE_SPRIG_VERSION={} > _web/.env
+  grep github.com/Masterminds/sprig/v3 go.mod | xargs echo | cut -d " " -f2 | xargs -I{} echo VITE_SPRIG_VERSION={} > _web/.env
   go version | cut -d " " -f3- | xargs -I{} echo VITE_GO_VERSION="GOOS=js GOARCH=wasm {}" >> _web/.env
 
   if [[ -z "$R_TAG" ]]; then
