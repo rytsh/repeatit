@@ -1,7 +1,8 @@
 import { loading } from "@/lib/store";
 import "./wasm_exec.js";
+import { repeatitVersion } from "@/lib/store/versions";
 
-const initWasm = (wasmFile = "./wasm/repeatit.wasm") => {
+const initWasm = (wasmFile = `./wasm/repeatit-${repeatitVersion}.wasm`) => {
   if (!WebAssembly.instantiateStreaming) { // polyfill
     WebAssembly.instantiateStreaming = async (resp, importObject) => {
       const source = await (await resp).arrayBuffer();

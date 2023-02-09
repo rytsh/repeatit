@@ -1,7 +1,6 @@
 MAIN_FILE := cmd/jsgo/main.go
-OUTPUT    := _web/static/wasm/repeatit.wasm
-
 VERSION   := $(or $(IMAGE_TAG),$(shell git describe --tags --first-parent --match "v*" 2> /dev/null || echo v0.0.0))
+OUTPUT    := _web/static/wasm/repeatit-$(VERSION).wasm
 
 LOCAL_BIN_DIR := $(PWD)/bin
 
