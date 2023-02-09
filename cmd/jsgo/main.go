@@ -18,7 +18,7 @@ func main() {
 	release := jscript.SetFunctions()
 	defer release()
 
-	println("WASM initialized %s", version)
+	println("WASM initialized", version)
 
 	<-c
 }

@@ -1,4 +1,4 @@
 /bin/
-/_web/static/wasm/repeatit.wasm
+/_web/static/wasm/*.wasm
 /.golangci.yml
 /coverage.*
