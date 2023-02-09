@@ -20,14 +20,13 @@ __-__ full html output and link generated
 Build wasm file
 
 ```sh
-./build.sh --build
+make build
 ```
 
 Run frontend
 
 ```sh
-cd _web
-pnpm run dev
+make run
 ```
 
 Make local test first and to try other things use `ngrok` like tools before tag new version.

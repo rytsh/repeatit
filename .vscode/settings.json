@@ -4,8 +4,8 @@
         "GOOS":"js",
     },
     "go.testEnvVars": {
-        "GOARCH":"wasm",
-        "GOOS":"js",
+        "GOARCH":"amd64",
+        "GOOS":"linux",
     },
     "go.installDependenciesWhenBuilding": false,
 }

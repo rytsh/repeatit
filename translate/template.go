@@ -27,7 +27,7 @@ type Template struct {
 	HTML *htmlTemplate.Template
 }
 
-func (t Template) Ext(v any, file string, templateType Tmp, funcList []string) ([]byte, error) {
+func (t Template) Ext(value any, templateValue string, templateType Tmp, funcList []string) ([]byte, error) {
 	switch templateType {
 	case TXT:
 		template, err := t.TXT.Clone()
@@ -41,12 +41,12 @@ func (t Template) Ext(v any, file string, templateType Tmp, funcList []string) (
 			}
 		}
 
-		tmp, err := template.Parse(file)
+		tmp, err := template.Parse(templateValue)
 		if err != nil {
 			return nil, fmt.Errorf("parse text template error: %w", err)
 		}
 
-		return Execute(v, tmp)
+		return Execute(value, tmp)
 	case HTML:
 		template, err := t.HTML.Clone()
 		if err != nil {
@@ -59,12 +59,12 @@ func (t Template) Ext(v any, file string, templateType Tmp, funcList []string) (
 			}
 		}
 
-		tmp, err := template.Parse(file)
+		tmp, err := template.Parse(templateValue)
 		if err != nil {
 			return nil, fmt.Errorf("parse html template error: %w", err)
 		}
 
-		return Execute(v, tmp)
+		return Execute(value, tmp)
 	default:
 		return nil, fmt.Errorf("unknown template type")
 	}

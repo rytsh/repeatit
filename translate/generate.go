@@ -7,12 +7,12 @@ import (
 
 // Execute executes the template with the given data.
 func Execute(v any, tmp TemplateExecuter) ([]byte, error) {
-	var b bytes.Buffer
+	var buff bytes.Buffer
 
 	// Execute the template and write the output to the buffer
-	if err := tmp.Execute(&b, v); err != nil {
+	if err := tmp.Execute(&buff, v); err != nil {
 		return nil, fmt.Errorf("execute template error: %w", err)
 	}
 
-	return b.Bytes(), nil
+	return buff.Bytes(), nil
 }

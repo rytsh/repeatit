@@ -4,45 +4,48 @@ on:
     tags:
       - v[0-9]*
 jobs:
-  backend:
+  release:
     runs-on: ubuntu-latest
-    container:
-      image: golang:1.18.8
     steps:
-      - uses: actions/checkout@v2
+      # Wasm build
+      - uses: actions/checkout@v3
+      - name: Install Go
+        uses: actions/setup-go@v3
+        with:
+          # stable: 'false' # Keep this line to be able to use rc and beta version of Go (ex: 1.18.0-rc1).
+          go-version: 1.19.5
+      - name: Unshallow
+        run: git fetch --prune --unshallow
       - name: build wasm
         run: |
-          ./build.sh --build --tag ${{github.ref_name}}
-          tar -cvf wasm.tar _web/.env _web/static/wasm/repeatit.wasm
-      - name: Upload Artifact WASM
-        uses: actions/upload-artifact@v2
+          make build
+      # Frontend
+      - name: Install Node.js
+        uses: actions/setup-node@v3
         with:
-          name: wasm
-          path: wasm.tar
-          retention-days: 1
-  frontend:
-    needs: backend
-    runs-on: ubuntu-latest
-    container:
-      image: rytsh/frontend-pnpm:v0.0.4
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v2
+          node-version: 16
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
         with:
-          name: wasm
-          path: .
-      - name: Cache node modules
-        uses: actions/cache@v2
-        with:
-          path: ~/.pnpm-store
-          key: pnpm-deps
-          restore-keys: pnpm-deps
-      - name: install deps and build
+          version: 7
+          run_install: false
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
         run: |
-          tar -vxf wasm.tar
-          cd _web
-          pnpm install --prefer-offline
-          pnpm build
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - name: build frontend
+        run: |
+          make build-front
+      # publish page
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

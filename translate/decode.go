@@ -7,25 +7,28 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-// Decode decodes the YAML/JSON and returns the result as a map.
-func Decode(data string, t string) (any, error) {
-	switch t {
+// Decode decodes the raw, yaml/json, toml and returns the result.
+func Decode(data, codec string) (any, error) {
+	switch codec {
 	case "raw":
-		// readall
+		// read all
 		return data, nil
 	case "yaml":
 		var v any
 		if err := yaml.Unmarshal([]byte(data), &v); err != nil {
-			return nil, err
+			return nil, err //nolint:wrapcheck // show raw error
 		}
+
 		return v, nil
 	case "toml":
 		var v any
 		if err := toml.Unmarshal([]byte(data), &v); err != nil {
-			return nil, err
+			return nil, err //nolint:wrapcheck // show raw error
 		}
+
 		return v, nil
 	default:
-		return nil, fmt.Errorf("unknown decode type: %s", t)
+
+		return nil, fmt.Errorf("unknown decode type: %s", codec)
 	}
 }
