@@ -26,7 +26,7 @@ make build
 Run frontend
 
 ```sh
-make run
+make build-front-install run
 ```
 
 Make local test first and to try other things use `ngrok` like tools before tag new version.

@@ -15,9 +15,13 @@ build: values ## Build the binary file
 	@echo "> Building $(MAIN_FILE) version $(VERSION)"
 	GOOS=js GOARCH=wasm go build -trimpath -ldflags="-s -w -X main.version=$(VERSION)" -o $(OUTPUT) $(MAIN_FILE)
 
+.PHONY: build-front-install
+build-front-install: ## Install the front
+	@cd _web && pnpm install --prefer-offline
+
 .PHONY: build-front
-build-front: ## Build the front
-	@cd _web && pnpm install --prefer-offline && pnpm run build
+build-front: build-front-install ## Build the front
+	@cd _web && pnpm run build
 
 .PHONY: preview
 preview: ## Preview the front
