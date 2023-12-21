@@ -24,6 +24,7 @@
 
   export let watchErr = false;
   let err = false;
+  let errmsg = "";
   let success = false;
 
   let editor: Editor;
@@ -87,7 +88,13 @@
       if (getValue == value) {
         return;
       }
-      editor.setValue(value);
+      if (!err) {
+        scroll = editor.getScrollInfo();
+        editor.setValue(value);
+        editor.scrollTo(scroll["left"],scroll["top"]);
+      } else {
+        errmsg = v[watchCode];
+      }
 
       // get result
       if (getResult) {
@@ -160,6 +167,13 @@
         style="width:100%;height:100%"
         title="view html"
       />
+    {/if}
+    {#if err }
+      <div
+        class={`px-1 bg-neutral-100 dark:bg-neutral-800 dark:text-neutral-300 border-b border-neutral-200 dark:border-neutral-600 flex flex-row items-center justify-between !bg-red-400 !dark:bg-red-400 !text-neutral-800`}
+      >
+        <div class="leading-normal">{errmsg}</div>
+      </div>
     {/if}
   </div>
 </div>
