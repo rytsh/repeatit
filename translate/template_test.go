@@ -10,7 +10,7 @@ func TestTemplate_Ext(t *testing.T) {
 		value         any
 		templateValue string
 		templateType  Tmp
-		funcList      []string
+		funcList      string
 	}
 	tests := []struct {
 		name     string
@@ -45,7 +45,18 @@ func TestTemplate_Ext(t *testing.T) {
 				value:         nil,
 				templateValue: "{{ uuidv4 }}",
 				templateType:  HTML,
-				funcList:      []string{"sprig"},
+				funcList:      "sprig",
+			},
+			wantSkip: true,
+			wantErr:  false,
+		},
+		{
+			name: "uuid generate",
+			args: args{
+				value:         nil,
+				templateValue: "{{ fromJson }}",
+				templateType:  HTML,
+				funcList:      "helm",
 			},
 			wantSkip: true,
 			wantErr:  false,

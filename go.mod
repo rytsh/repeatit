@@ -1,11 +1,12 @@
 module github.com/rytsh/repeatit
 
-go 1.21
+go 1.22
 
 require (
 	github.com/BurntSushi/toml v1.2.1
 	github.com/Masterminds/sprig/v3 v3.2.3
 	gopkg.in/yaml.v3 v3.0.1
+	sigs.k8s.io/yaml v1.4.0
 )
 
 require (

@@ -7,8 +7,8 @@
   "eslint.alwaysShowStatus": true,
   "eslint.format.enable": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-    "source.fixAll.stylelint": true
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
   },
   "stylelint.packageManager": "pnpm",
   "stylelint.validate": [

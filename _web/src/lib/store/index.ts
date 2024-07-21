@@ -39,7 +39,7 @@ export const codes = writable(initialCodes);
 
 // Convert settings
 export const convertTemplates = ["text", "html"];
-export const convertFunctions = ["sprig"];
+export const convertFunctions = ["sprig", "helm"];
 export const options = ["live"];
 
 enum inputTypes {
@@ -52,14 +52,14 @@ export const inputTypesValues = Object.values(inputTypes);
 
 const initialConvertConfig = {
   template: "text" as typeof convertTemplates[number],
-  functions: new Set(convertFunctions),
+  functions: "helm" as typeof convertFunctions[number],
   options: new Set(options),
   inputType: inputTypes.yaml,
 };
 
 export type configType = {
   template: string;
-  functions: string[];
+  functions: string;
   options: string[];
   fullScreenHTML: boolean,
   inputType?: inputTypes,
@@ -71,7 +71,7 @@ export const getConfig = () => {
   return {
     template,
     fullScreenHTML: get(fullScreenHTML),
-    functions: Array.from(functions),
+    functions: functions,
     options: Array.from(options),
     inputType,
   } as configType;
@@ -84,7 +84,7 @@ export const setConfig = (config: configType) => {
   convertConfig.update((v) => ({
     ...v,
     template: config.template,
-    functions: new Set(config.functions),
+    functions: config.functions,
     options: new Set(config.options),
     inputType: config.inputType ?? inputTypes.yaml,
   }));

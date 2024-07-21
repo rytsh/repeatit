@@ -1,6 +1,5 @@
 import { minify } from "html-minifier";
 import type { Options as minifyOptions } from "html-minifier";
-import { prerendering } from "$app/environment";
 const repeatitVersion = import.meta.env.VITE_REPEATIT_VERSION;
 
 const minificationOptions: minifyOptions = {
@@ -42,7 +41,7 @@ export async function handle({ event, resolve }) {
     return response;
   }
 
-  if (prerendering && response.headers.get("content-type") === "text/html") {
+  if (response.headers.get("content-type") === "text/html") {
     console.log("> Prerendering hook function called");
     let tx = await response.text();
     if (repeatitVersion != "test") {

@@ -5,7 +5,6 @@ package jscript
 
 import (
 	"errors"
-	"strings"
 	"syscall/js"
 
 	"github.com/rytsh/repeatit/translate"
@@ -50,9 +49,9 @@ func renderWithError(args []js.Value) (any, error) {
 		selectedTemplate = translate.HTML
 	}
 
-	funcList := strings.Split(args[3].String(), ",")
+	selectedFuncs := args[3].String()
 
-	result, err := translate.GlobalTemplate.Ext(values, text, selectedTemplate, funcList)
+	result, err := translate.GlobalTemplate.Ext(values, text, selectedTemplate, selectedFuncs)
 	if err != nil {
 		return nil, errors.New("render; " + err.Error())
 	}

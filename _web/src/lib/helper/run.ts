@@ -15,7 +15,7 @@ const run = async () => {
         values.input == "" ? "null" : values.input,
         values.template,
         config.template,
-        [...config.functions.keys()].join(","),
+        config.functions,
         config.inputType,
       );
     } catch (error) {

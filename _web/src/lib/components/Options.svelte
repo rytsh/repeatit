@@ -50,24 +50,12 @@
           break;
         case "function":
           {
-            const funcName = (e.target as HTMLElement).dataset["function"];
-            if (!funcName) {
-              return;
-            }
-            const value = (e.target as HTMLInputElement).checked;
-            if (value) {
-              convertConfig.update((conf) =>
-                update(conf, {
-                  functions: { $add: [funcName] },
-                })
-              );
-            } else {
-              convertConfig.update((conf) =>
-                update(conf, {
-                  functions: { $remove: [funcName] },
-                })
-              );
-            }
+            const funcName = (e.target as HTMLSelectElement).value;
+            convertConfig.update((conf) =>
+              update(conf, {
+                functions: { $set: funcName },
+              })
+            );
 
             run();
           }
@@ -142,21 +130,15 @@
 
     <fieldset class="border border-solid border-neutral-300 p-2 ml-2">
       <legend class="px-1 text-sm">Choose functions</legend>
-
-      {#each convertFunctions as funcName, i}
-        <label class="flex items-center">
-          <input
-            type="checkbox"
-            data-type="function"
-            data-function={funcName}
-            checked={$convertConfig.functions.has(funcName)}
-            class="bg-neutral-100 focus:ring-blue-500 text-blue-600 border-neutral-300 h-4 w-4 rounded dark:focus:ring-blue-600 dark:ring-offset-neutral-800 focus:ring-2 dark:bg-neutral-700 dark:border-neutral-600"
-          />
-          <span class="text-sm ml-3 font-medium">
-            {funcName}
-          </span>
-        </label>
-      {/each}
+      <select
+        value={$convertConfig.functions}
+        data-type="function"
+        class="rounded-none text-sm font-medium block w-full bg-neutral-50 cursor-pointer"
+      >
+        {#each convertFunctions as funcName}
+          <option value={funcName}>{funcName}</option>
+        {/each}
+      </select>
     </fieldset>
 
     <fieldset class="border border-solid border-neutral-300 p-2 ml-2">
@@ -184,6 +166,6 @@
     {" | "}
     {$convertConfig.template}
     {" | "}
-    {[...$convertConfig.functions.keys()].join(",")}
+    {$convertConfig.functions}
   </div>
 </button>

@@ -7,6 +7,7 @@ import (
 	textTemplate "text/template"
 
 	"github.com/Masterminds/sprig/v3"
+	"github.com/rytsh/repeatit/translate/templates/helm"
 )
 
 type Tmp int
@@ -27,7 +28,7 @@ type Template struct {
 	HTML *htmlTemplate.Template
 }
 
-func (t Template) Ext(value any, templateValue string, templateType Tmp, funcList []string) ([]byte, error) {
+func (t Template) Ext(value any, templateValue string, templateType Tmp, funcList string) ([]byte, error) {
 	switch templateType {
 	case TXT:
 		template, err := t.TXT.Clone()
@@ -35,10 +36,11 @@ func (t Template) Ext(value any, templateValue string, templateType Tmp, funcLis
 			return nil, fmt.Errorf("clone text template error: %w", err)
 		}
 
-		for _, f := range funcList {
-			if f == "sprig" {
-				template = template.Funcs(sprig.TxtFuncMap())
-			}
+		switch funcList {
+		case "sprig":
+			template = template.Funcs(sprig.TxtFuncMap())
+		case "helm":
+			template = template.Funcs(helm.FuncMap())
 		}
 
 		tmp, err := template.Parse(templateValue)
@@ -53,10 +55,11 @@ func (t Template) Ext(value any, templateValue string, templateType Tmp, funcLis
 			return nil, fmt.Errorf("clone html template error: %w", err)
 		}
 
-		for _, f := range funcList {
-			if f == "sprig" {
-				template = template.Funcs(sprig.HtmlFuncMap())
-			}
+		switch funcList {
+		case "sprig":
+			template = template.Funcs(sprig.HtmlFuncMap())
+		case "helm":
+			template = template.Funcs(helm.FuncMap())
 		}
 
 		tmp, err := template.Parse(templateValue)
