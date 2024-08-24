@@ -1,0 +1,1 @@
+import{g as r}from"./2.BKBp5HD2.js";import{r as o}from"./codemirror.Dw64_b3O.js";var e=o();const t=r(e),a=Object.freeze(Object.defineProperty({__proto__:null,default:t},Symbol.toStringTag,{value:"Module"}));export{a as c};
