@@ -1,12 +1,13 @@
 /* stylelint-disable max-line-length */
 /* stylelint-disable no-invalid-position-at-import-rule */
 
-// tailwindcss
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import 'style/tools';
+@import 'style/code';
+@import 'style/scroller';
+@import 'style/icons';
 
 html,
 body {
@@ -14,9 +15,13 @@ body {
 }
 
 .drag-line-right {
-  @apply bg-neutral-300 hover:bg-red-400 dark:bg-neutral-600 dark:hover:bg-red-400 block absolute right-0 top-0 h-full w-1 hover:cursor-col-resize;
+  @apply bg-neutral-300 hover:bg-red-500 dark:bg-neutral-600 dark:hover:bg-red-500 block absolute right-0 top-0 h-full w-1 hover:cursor-col-resize;
 }
 
 .drag-line-bottom {
-  @apply bg-neutral-300 hover:bg-red-400 dark:bg-neutral-600 dark:hover:bg-red-400 block absolute bottom-0 w-full h-1 hover:cursor-row-resize;
+  @apply bg-neutral-300 hover:bg-red-500 dark:bg-neutral-600 dark:hover:bg-red-500 block absolute bottom-0 w-full h-1 hover:cursor-row-resize;
+}
+
+::selection {
+  @apply bg-red-500 text-white;
 }

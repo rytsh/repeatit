@@ -157,7 +157,7 @@
 </div>
 
 <button
-  class="px-1 flex items-center bg-neutral-200 text-sm pr-1 w-full justify-between hover:bg-neutral-400 relative"
+  class="px-1 py-1 flex items-center bg-neutral-200 text-sm pr-1 w-full justify-between hover:bg-neutral-400 relative"
   on:click|stopPropagation={toggleSettings}
 >
   <div>Settings</div>

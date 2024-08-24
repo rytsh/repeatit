@@ -5,7 +5,6 @@
   import update from "immutability-helper";
 
   import type { Editor } from "codemirror";
-  import Icon from "@/lib/ui/Icon.svelte";
   import { copyClip } from "@/lib/helper/copy";
 
   let code: HTMLElement;
@@ -89,9 +88,9 @@
         return;
       }
       if (!err) {
-        scroll = editor.getScrollInfo();
+        let scroll = editor.getScrollInfo();
         editor.setValue(value);
-        editor.scrollTo(scroll["left"],scroll["top"]);
+        editor.scrollTo(scroll["left"], scroll["top"]);
       } else {
         errmsg = v[watchCode];
       }
@@ -128,36 +127,29 @@
 <div class={`flex min-h-full h-full w-full ${className}`}>
   <div class="flex-1 grid h-full grid-rows-[auto_1fr]">
     <div
-      class={`px-1 bg-neutral-100 dark:bg-neutral-800 dark:text-neutral-300 border-b border-neutral-200 dark:border-neutral-600 flex flex-row items-center justify-between ${
+      class={`px-1 bg-neutral-100 dark:bg-custom-200 dark:text-neutral-300 border-b border-neutral-200 dark:border-neutral-600 flex flex-row items-center justify-between ${
         err ? "!bg-red-400 !dark:bg-red-400 !text-neutral-800" : ""
-      } ${success ? "!bg-green-300 !dark:bg-green-300 !text-neutral-800" : ""}`}
+      } ${success ? "!bg-emerald-300 dark:!bg-emerald-400 !text-neutral-800" : ""}`}
     >
       <div class="h-full flex">
-        <span class="truncate leading-10">{title}</span>
+        <span class="truncate py-0.5">{title}</span>
         <slot name="title" />
       </div>
       <div class="flex gap-2">
         <slot name="actions" />
         <button
-          class={`text-white font-bold py-2 h-full flex items-center  ${
-            err || success
-              ? "fill-neutral-700 hover:fill-white"
-              : "fill-neutral-500 hover:fill-neutral-900 dark:hover:fill-yellow-200"
-          }`}
+          class={`text-white font-bold py-1 w-6 h-5 flex items-center
+            ${copied ? "icon-copied" : "icon-copy"}
+            ${err || success ? "bg-neutral-600" : "bg-custom-500"}
+          `}
           on:click|stopPropagation={copy}
           title={copied ? "copied" : "copy to clipboard"}
-        >
-          {#if copied}
-            <Icon icon="tick" />
-          {:else}
-            <Icon icon="copy" />
-          {/if}
-        </button>
+        />
       </div>
     </div>
     <code
       bind:this={code}
-      class={`h-full overflow-auto ${show == "code" ? "" : "hidden"}`}
+      class={`h-full overflow-auto scroller ${show == "code" ? "" : "hidden"}`}
     />
     {#if title == "Output" && show == "show"}
       <iframe
@@ -168,9 +160,9 @@
         title="view html"
       />
     {/if}
-    {#if err }
+    {#if err}
       <div
-        class={`px-1 bg-neutral-100 dark:bg-neutral-800 dark:text-neutral-300 border-b border-neutral-200 dark:border-neutral-600 flex flex-row items-center justify-between !bg-red-400 !dark:bg-red-400 !text-neutral-800`}
+        class={`px-1 border-b border-neutral-200 dark:border-neutral-600 flex flex-row items-center justify-between bg-red-400 dark:bg-red-400 text-neutral-800`}
       >
         <div class="leading-normal">{errmsg}</div>
       </div>

@@ -1,6 +1,6 @@
 module github.com/rytsh/repeatit
 
-go 1.22
+go 1.23
 
 require (
 	github.com/BurntSushi/toml v1.2.1

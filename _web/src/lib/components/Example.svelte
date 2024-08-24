@@ -47,10 +47,10 @@
 </script>
 
 <select
-  class="self-stretch bg-gray-50 cursor-pointer w-28 rounded-none truncate px-1"
+  class="self-stretch bg-gray-50 cursor-pointer w-32 rounded-none truncate px-1"
   bind:value={selected}
 >
-  <option value="">examples</option>
+  <option value="">--examples--</option>
   {#each [...examples.keys()] as name}
     <option value={name}>{name}</option>
   {/each}

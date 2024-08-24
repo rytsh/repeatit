@@ -9,6 +9,12 @@ module.exports = {
   darkMode: "class", // or 'media' or 'class'
   theme: {
     extend: {
+      colors: {
+        custom: {
+          200: "#252422",
+          500: "#808080",
+        },
+      },
       screens: {
         "sm-max": { "max": "639px" },
       },
