@@ -39,7 +39,7 @@ export const codes = writable(initialCodes);
 
 // Convert settings
 export const convertTemplates = ["text", "html"];
-export const convertFunctions = ["sprig", "helm"];
+export const convertFunctions = ["", "sprig", "helm"];
 export const options = ["live"];
 
 enum inputTypes {

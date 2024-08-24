@@ -136,7 +136,7 @@
         class="rounded-none text-sm font-medium block w-full bg-neutral-50 cursor-pointer"
       >
         {#each convertFunctions as funcName}
-          <option value={funcName}>{funcName}</option>
+          <option value={funcName}>{funcName != "" ? funcName : "--"}</option>
         {/each}
       </select>
     </fieldset>
