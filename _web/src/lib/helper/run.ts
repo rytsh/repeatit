@@ -11,8 +11,10 @@ const run = async () => {
   if (render) {
     let output: string;
     try {
+      let nullValue = config.inputType == "raw" ? "" : "null";
+
       output = await render(
-        values.input == "" ? "null" : values.input,
+        values.input == "" ? nullValue : values.input,
         values.template,
         config.template,
         config.functions,

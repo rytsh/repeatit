@@ -6,18 +6,13 @@
   import update from "immutability-helper";
   import { runIt } from "@/lib/helper/load";
   import { browser } from "$app/environment";
+  import { onMount } from "svelte";
+  import Select from "../ui/Select.svelte";
 
   const exampleURL = "/example/";
 
   let firstLocation = "";
   let selected = "";
-
-  if (browser) {
-    firstLocation = get(location);
-    if (firstLocation.startsWith(exampleURL)) {
-      selected = firstLocation.replace(exampleURL, "");
-    }
-  }
 
   const changeSelected = (vSelected: string) => {
     if (!vSelected) {
@@ -43,15 +38,27 @@
     runIt();
   };
 
-  $: changeSelected(selected);
+  onMount(() => {
+    if (browser) {
+      firstLocation = get(location);
+      if (firstLocation.startsWith(exampleURL)) {
+        selected = firstLocation.replace(exampleURL, "");
+      }
+
+      changeSelected(selected);
+    }
+  });
 </script>
 
-<select
-  class="self-stretch bg-gray-50 cursor-pointer w-32 rounded-none truncate px-1"
-  bind:value={selected}
->
-  <option value="">--examples--</option>
-  {#each [...examples.keys()] as name}
-    <option value={name}>{name}</option>
-  {/each}
-</select>
+<Select>
+  <select
+    class="w-36 px-3 h-10 py-2 text-gray-800 bg-white border-l border-r cursor-pointer hover:bg-gray-50 rounded-none outline-none appearance-none focus:ring-offset-2 focus:ring-red-400 focus:ring-2"
+    bind:value={selected}
+    onchange={() => changeSelected(selected)}
+  >
+    <option value="">--examples--</option>
+    {#each [...examples.keys()] as name}
+      <option value={name}>{name}</option>
+    {/each}
+  </select>
+</Select>

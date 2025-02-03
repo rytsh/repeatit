@@ -3,15 +3,17 @@
   import { fullScreenHTML, getConfig } from "@/lib/store";
   import { getLink } from "@/lib/helper/share";
 
-  let show = "code";
+  let show = $state("code");
 </script>
 
 <Code title="Output" watchCode="output" watchErr={true} {show}>
   <div slot="title" class="contents">
     <button
       class="h-full px-3 ml-2 border-l border-neutral-300 dark:border-slate-600 hover:text-black hover:bg-yellow-200"
-      on:click|stopPropagation={() =>
-        show == "code" ? (show = "show") : (show = "code")}
+      onclick={(e: Event) => {
+        e.stopPropagation();
+        show == "code" ? (show = "show") : (show = "code");
+      }}
     >
       {#if show == "code"}
         <span>View HTML</span>
@@ -23,7 +25,8 @@
       <button
         class="h-full pl-4 pr-3 border-l border-neutral-300 dark:border-slate-600 hover:text-black hover:bg-yellow-200"
         title="full screen view and generate link"
-        on:click|stopPropagation={() => {
+        onclick={(e: Event) => {
+          e.stopPropagation();
           const config = getConfig();
           config.fullScreenHTML = true;
 

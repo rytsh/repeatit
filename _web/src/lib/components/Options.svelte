@@ -9,7 +9,8 @@
   import { onMount } from "svelte";
   import update from "immutability-helper";
   import { versions } from "@/lib/store/versions";
-  import { run } from "../helper/run";
+  import { run } from "@/lib/helper/run";
+  import Select from "@/lib/ui/Select.svelte";
 
   let htmlSettings: HTMLDivElement;
 
@@ -119,7 +120,7 @@
             data-type="option"
             data-function={optName}
             checked={$convertConfig.options.has(optName)}
-            class="bg-neutral-100 focus:ring-blue-500 text-blue-600 border-neutral-300 h-4 w-4 rounded dark:focus:ring-blue-600 dark:ring-offset-neutral-800 focus:ring-2 dark:bg-neutral-700 dark:border-neutral-600"
+            class="bg-neutral-100 focus:ring-blue-500 text-blue-600 border-neutral-300 h-4 w-4 rounded-none dark:focus:ring-blue-600 dark:ring-offset-neutral-800 focus:ring-2 dark:bg-neutral-700 dark:border-neutral-600"
           />
           <span class="text-sm ml-3 font-medium">
             {optName}
@@ -130,28 +131,32 @@
 
     <fieldset class="border border-solid border-neutral-300 p-2 ml-2">
       <legend class="px-1 text-sm">Choose functions</legend>
-      <select
-        value={$convertConfig.functions}
-        data-type="function"
-        class="rounded-none text-sm font-medium block w-full bg-neutral-50 cursor-pointer"
-      >
-        {#each convertFunctions as funcName}
-          <option value={funcName}>{funcName != "" ? funcName : "--"}</option>
-        {/each}
-      </select>
+      <Select>
+        <select
+          value={$convertConfig.functions}
+          data-type="function"
+          class="text-sm font-medium w-full bg-neutral-50 cursor-pointer hover:bg-gray-50 rounded-none outline-none appearance-none focus:ring-offset-2 focus:ring-red-400 focus:ring-2"
+        >
+          {#each convertFunctions as funcName}
+            <option value={funcName}>{funcName != "" ? funcName : "--"}</option>
+          {/each}
+        </select>
+      </Select>
     </fieldset>
 
     <fieldset class="border border-solid border-neutral-300 p-2 ml-2">
       <legend class="px-1 text-sm">Choose renderer</legend>
-      <select
-        value={$convertConfig.template}
-        data-type="template"
-        class="rounded-none text-sm font-medium block w-full bg-neutral-50 cursor-pointer"
-      >
-        {#each convertTemplates as tempName}
-          <option value={tempName}>{tempName}</option>
-        {/each}
-      </select>
+      <Select>
+        <select
+          value={$convertConfig.template}
+          data-type="template"
+          class="text-sm font-medium w-full bg-neutral-50 cursor-pointer hover:bg-gray-50 rounded-none outline-none appearance-none focus:ring-offset-2 focus:ring-red-400 focus:ring-2"
+        >
+          {#each convertTemplates as tempName}
+            <option value={tempName}>{tempName}</option>
+          {/each}
+        </select>
+      </Select>
     </fieldset>
   </div>
 </div>
@@ -162,6 +167,7 @@
 >
   <div>Settings</div>
   <div>
+    {$convertConfig.options.has("default-null") ? "null | " : ""}
     {$convertConfig.options.has("live") ? "live on" : "live off"}
     {" | "}
     {$convertConfig.template}

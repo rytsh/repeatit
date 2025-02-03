@@ -1,5 +1,7 @@
 <script lang="ts">
   import "@/app.scss";
+
+  let { children } = $props();
 </script>
 
 <svelte:head>
@@ -28,4 +30,4 @@
   <link rel="icon" type="image/svg+xml" href="./logo.svg" />
 </svelte:head>
 
-<slot />
+{@render children()}

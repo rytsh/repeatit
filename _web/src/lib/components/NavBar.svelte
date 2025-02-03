@@ -8,16 +8,14 @@
   import Share from "@/lib/components/Share.svelte";
   import "@/lib/helper/load";
 
-  let className = "";
-
-  export { className as class };
+  let { class: className } = $props();
 </script>
 
 <div class={`bg-yellow-200 flex items-center justify-between ${className}`}>
   <div class="flex-grow flex items-center self-stretch">
     <button
       class="flex items-center h-full text-lg font-semibold px-1 py-0.5 pr-5 bg-transparent text-black hover:bg-green-500 hover:text-gray-100 fill-gray-600 hover:fill-white"
-      on:click|stopPropagation={run}
+      onclick={run}
       title="run repeatit"
     >
       <Icon icon="repeatit" class="pr-1" />
@@ -34,6 +32,6 @@
   <Theme class="px-2" />
   <Corner
     href="https://github.com/rytsh/repeatit"
-    class="h-8 hover:fill-red-500 fill-gray-400"
+    class="h-10 hover:fill-red-500 fill-gray-400"
   />
 </div>

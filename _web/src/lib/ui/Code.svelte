@@ -1,36 +1,51 @@
 <script lang="ts">
-  import { afterUpdate, onMount } from "svelte";
-  import { codes, codeTheme, convertConfig, editorConfig } from "@/lib/store";
+  import type { Editor } from "codemirror";
+  import { onDestroy, onMount } from "svelte";
   import type { codesKeys } from "@/lib/store";
   import update from "immutability-helper";
-
-  import type { Editor } from "codemirror";
   import { copyClip } from "@/lib/helper/copy";
+  import { codes, codeTheme, convertConfig, editorConfig } from "@/lib/store";
+  import { debounce } from "@/lib/helper/debounce";
 
   let code: HTMLElement;
 
-  export let title = "title";
-  export let placeholder = "# F11 to toggle fullscreen";
-  export let mode = undefined as string;
-  export let show = "code";
-  let className = "";
-  export { className as class };
+  let {
+    title = "title",
+    placeholder = "# F11 to toggle fullscreen",
+    mode = undefined,
+    show = "code",
+    class: className = "",
+    watchCode,
+    watchErr = false,
+    liveFunc = () => null,
+    getResult = () => null,
+    slotTitle = () => null,
+    slotActions = () => null,
+  }: {
+    title?: string;
+    placeholder?: string;
+    mode?: string | undefined;
+    show?: string;
+    class?: string;
+    watchCode?: codesKeys;
+    watchErr?: boolean;
+    liveFunc?: () => void;
+    getResult?: (v: any) => void;
+    slotTitle?: () => any;
+    slotActions?: () => any;
+  } = $props();
 
-  export let watchCode: codesKeys;
-  let value = "";
+  let value = $state("");
   let trigger = undefined as boolean | undefined;
   let triggerError = undefined as boolean | undefined;
 
-  export let watchErr = false;
-  let err = false;
-  let errmsg = "";
-  let success = false;
+  let err = $state(false);
+  let errmsg = $state("");
+  let success = $state(false);
 
   let editor: Editor;
-  let copied = false;
-
-  export let liveFunc: () => void = null;
-  export let getResult: (v: any) => void = null;
+  let copied = $state(false);
+  let themeSubscribe = () => null;
 
   const copy = () => {
     copyClip(editor.getValue()).then(
@@ -44,20 +59,14 @@
     );
   };
 
-  const setTheme = (theme: string) => {
-    editor.setOption("theme", theme);
-  };
-
-  $: {
-    editor && setTheme($codeTheme);
-  }
-
-  afterUpdate(() => {
+  $effect(() => {
     editor && editor.refresh();
   });
 
   onMount(async () => {
     const CodeMirror = (await import("codemirror")).default;
+    await ((ms) => new Promise((f) => setTimeout(f, ms)))(40);
+
     editor = CodeMirror(code, {
       ...$editorConfig,
       placeholder: `${placeholder}`,
@@ -65,6 +74,9 @@
     });
     editor.setSize("100%", "100%");
     editor.setOption("theme", $codeTheme);
+    themeSubscribe = codeTheme.subscribe((v) => {
+      editor.setOption("theme", v);
+    });
 
     codes.subscribe((v) => {
       if (
@@ -101,26 +113,33 @@
       }
     });
 
-    editor.on("change", () => {
-      const getValue = editor.getValue();
-      if (getValue == value) {
-        return;
-      }
+    editor.on(
+      "change",
+      debounce(() => {
+        const getValue = editor.getValue();
+        if (getValue == value) {
+          return;
+        }
 
-      codes.update((v) =>
-        update(v, {
-          [watchCode]: { $set: getValue },
-          error: { $set: false },
-          success: { $set: false },
-          triggerError: { $set: !v.triggerError },
-        })
-      );
+        codes.update((v) =>
+          update(v, {
+            [watchCode]: { $set: getValue },
+            error: { $set: false },
+            success: { $set: false },
+            triggerError: { $set: !v.triggerError },
+          })
+        );
 
-      // live update
-      if (liveFunc && $convertConfig.options.has("live")) {
-        liveFunc();
-      }
-    });
+        // live update
+        if (liveFunc && $convertConfig.options.has("live")) {
+          liveFunc();
+        }
+      }, 2)
+    );
+  });
+
+  onDestroy(() => {
+    themeSubscribe();
   });
 </script>
 
@@ -133,24 +152,25 @@
     >
       <div class="h-full flex">
         <span class="truncate py-0.5">{title}</span>
-        <slot name="title" />
+        {@render slotTitle()}
       </div>
       <div class="flex gap-2">
-        <slot name="actions" />
+        {@render slotActions()}
         <button
           class={`text-white font-bold py-1 w-6 h-5 flex items-center
             ${copied ? "icon-copied" : "icon-copy"}
             ${err || success ? "bg-neutral-600" : "bg-custom-500"}
           `}
-          on:click|stopPropagation={copy}
+          onclick={copy}
           title={copied ? "copied" : "copy to clipboard"}
-        />
+          aria-label={copied ? "copied" : "copy to clipboard"}
+        ></button>
       </div>
     </div>
     <code
       bind:this={code}
       class={`h-full overflow-auto scroller ${show == "code" ? "" : "hidden"}`}
-    />
+    ></code>
     {#if title == "Output" && show == "show"}
       <iframe
         seamless
@@ -158,7 +178,7 @@
         srcdoc={value}
         style="width:100%;height:100%"
         title="view html"
-      />
+      ></iframe>
     {/if}
     {#if err}
       <div

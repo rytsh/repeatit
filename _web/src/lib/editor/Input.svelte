@@ -2,8 +2,9 @@
   import Code from "@/lib/ui/Code.svelte";
   import { run } from "@/lib/helper/run";
   import { convertConfig, inputTypesValues } from "@/lib/store";
+  import Select from "@/lib/ui/Select.svelte";
 
-  let title = "";
+  let title = $state("");
 
   const updateTitle = (v: string) => {
     switch (v) {
@@ -23,25 +24,32 @@
   };
 
   // input types change title
-  $: updateTitle($convertConfig.inputType);
+  $effect(() => {
+    updateTitle($convertConfig.inputType);
+  });
 </script>
+
+{#snippet slotTitle()}
+  <div slot="title" class="inline-flex mx-2 border-l border-neutral-400">
+    <Select>
+      <select
+        bind:value={$convertConfig.inputType}
+        data-type="template"
+        class="px-2 w-20 h-full bg-neutral-100 dark:bg-neutral-700 hover:bg-yellow-200 hover:text-neutral-700 dark:hover:bg-yellow-200 hover:dark:text-neutral-700 cursor-pointer rounded-none outline-none appearance-none focus:ring-offset-2 focus:ring-red-400 focus:ring-2"
+        onchange={run}
+      >
+        {#each inputTypesValues as inputType}
+          <option value={inputType}>{inputType}</option>
+        {/each}
+      </select>
+    </Select>
+  </div>
+{/snippet}
 
 <Code
   {title}
   watchCode="input"
   placeholder={"null\n\n# F11 to toggle fullscreen"}
   liveFunc={run}
->
-  <div slot="title" class="inline-flex mx-2 border-l border-neutral-400">
-    <select
-      bind:value={$convertConfig.inputType}
-      data-type="template"
-      class="px-2 rounded-none block w-full bg-neutral-100 dark:bg-neutral-700 hover:bg-yellow-200 hover:text-neutral-700 dark:hover:bg-yellow-200 hover:dark:text-neutral-700 cursor-pointer"
-      on:change={run}
-    >
-      {#each inputTypesValues as inputType}
-        <option value={inputType}>{inputType}</option>
-      {/each}
-    </select>
-  </div>
-</Code>
+  {slotTitle}
+></Code>

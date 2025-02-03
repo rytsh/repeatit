@@ -12,7 +12,7 @@
 </script>
 
 <button
-  class="px-2 h-full hover:bg-green-500 hover:text-white"
+  class="px-3 h-full hover:bg-green-500 hover:text-white"
   on:click={share}
   title="copy share URL"
 >

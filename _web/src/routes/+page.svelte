@@ -82,7 +82,7 @@
       srcdoc={$codes.output}
       style="width:100%;height:100%"
       title="view html"
-    />
+    ></iframe>
   </div>
 {:else if $fullScreenHTML == false}
   <div class="h-full w-full grid grid-rows-[auto_1fr_auto]">

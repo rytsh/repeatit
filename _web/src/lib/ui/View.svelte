@@ -90,7 +90,8 @@
     bind:clientHeight={templateTargetHeight}
   >
     <slot name="template" />
-    <span bind:this={moveLineWidth} class="sm-max:hidden drag-line-right" />
+    <span bind:this={moveLineWidth} class="sm-max:hidden drag-line-right"
+    ></span>
   </div>
   <div
     class="flex-1 grid grid-rows-[auto_1fr] sm:flex-0"
@@ -104,7 +105,7 @@
       bind:clientHeight={inputTargetHeight}
     >
       <slot name="input" />
-      <span bind:this={moveLine} class="drag-line-bottom" />
+      <span bind:this={moveLine} class="drag-line-bottom"></span>
     </div>
     <div class="h-full min-h-full">
       <slot name="output" />
