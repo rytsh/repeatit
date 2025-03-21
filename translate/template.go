@@ -26,6 +26,10 @@ var GlobalTemplate *Template
 type Template struct {
 	TXT  *textTemplate.Template
 	HTML *htmlTemplate.Template
+
+	FuncSprig     textTemplate.FuncMap
+	FuncSprigHtml htmlTemplate.FuncMap
+	FuncHelm      func(*textTemplate.Template) textTemplate.FuncMap
 }
 
 func (t Template) Ext(value any, templateValue string, templateType Tmp, funcList string) ([]byte, error) {
@@ -38,9 +42,9 @@ func (t Template) Ext(value any, templateValue string, templateType Tmp, funcLis
 
 		switch funcList {
 		case "sprig":
-			template = template.Funcs(sprig.TxtFuncMap())
+			template = template.Funcs(t.FuncSprig)
 		case "helm":
-			template = template.Funcs(helm.FuncMap())
+			template = template.Funcs(t.FuncHelm(template))
 		}
 
 		tmp, err := template.Parse(templateValue)
@@ -57,9 +61,9 @@ func (t Template) Ext(value any, templateValue string, templateType Tmp, funcLis
 
 		switch funcList {
 		case "sprig":
-			template = template.Funcs(sprig.HtmlFuncMap())
+			template = template.Funcs(t.FuncSprigHtml)
 		case "helm":
-			template = template.Funcs(helm.FuncMap())
+			return nil, fmt.Errorf("helm functions are not supported for html templates")
 		}
 
 		tmp, err := template.Parse(templateValue)
@@ -74,10 +78,16 @@ func (t Template) Ext(value any, templateValue string, templateType Tmp, funcLis
 }
 
 func NewTemplate() *Template {
-	return &Template{
+	t := &Template{
 		TXT:  textTemplate.New("txt"),
 		HTML: htmlTemplate.New("html"),
 	}
+
+	t.FuncSprig = sprig.TxtFuncMap()
+	t.FuncSprigHtml = sprig.HtmlFuncMap()
+	t.FuncHelm = helm.FuncMap()
+
+	return t
 }
 
 func SetGlobalTemplate(t *Template) {
