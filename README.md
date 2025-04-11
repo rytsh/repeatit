@@ -13,7 +13,7 @@ __-__ switch html and text
 __-__ sprig, helm functions  
 __-__ html view  
 __-__ share template, input and settings  
-__-__ full html output and link generated  
+__-__ full html output  
 
 <details><summary>Development</summary>
 

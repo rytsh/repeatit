@@ -61,7 +61,6 @@ export type configType = {
   template: string;
   functions: string;
   options: string[];
-  fullScreenHTML: boolean,
   inputType?: inputTypes,
 };
 
@@ -70,7 +69,6 @@ export const getConfig = () => {
   const { template, functions, options, inputType } = get(convertConfig);
   return {
     template,
-    fullScreenHTML: get(fullScreenHTML),
     functions: functions,
     options: Array.from(options),
     inputType,
@@ -80,7 +78,6 @@ export const getConfig = () => {
 // set config from configType
 export const setConfig = (config: configType) => {
   console.log(config);
-  fullScreenHTML.set(config.fullScreenHTML);
   convertConfig.update((v) => ({
     ...v,
     template: config.template,
@@ -90,7 +87,6 @@ export const setConfig = (config: configType) => {
   }));
 };
 
-export const fullScreenHTML = writable(null as boolean | null);
 export const convertConfig = writable(initialConvertConfig);
 
 // UI settings

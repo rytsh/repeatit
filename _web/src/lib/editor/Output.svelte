@@ -1,42 +1,42 @@
 <script lang="ts">
   import Code from "@/lib/ui/Code.svelte";
-  import { fullScreenHTML, getConfig } from "@/lib/store";
-  import { getLink } from "@/lib/helper/share";
+  import { codes } from "@/lib/store";
 
   let show = $state("code");
 </script>
 
-<Code title="Output" watchCode="output" watchErr={true} {show}>
+{#snippet slotAction()}
   <div slot="title" class="contents">
+    {#if show == "show"}
+      <button
+        class="h-6 w-6 bg-[#525252] hover:bg-white icon-full"
+        title="open new window with full screen"
+        aria-label="open new window with full screen"
+        onclick={(e: Event) => {
+          e.stopPropagation();
+
+          const blob = new Blob([$codes.output], { type: "text/html" });
+          const blobUrl = URL.createObjectURL(blob);
+          window.open(blobUrl, "_blank");
+          setTimeout(() => URL.revokeObjectURL(blobUrl), 3000);
+        }}
+      >
+      </button>
+    {/if}
     <button
-      class="h-full px-3 ml-2 border-l border-neutral-300 dark:border-slate-600 hover:text-black hover:bg-yellow-200"
+      class={`h-6 w-6 bg-[#525252] hover:bg-white ${show == "code" ? "icon-html" : "icon-text"}
+    `}
+      aria-label={show == "code"
+        ? "Switch to html mode"
+        : "Switch to text mode"}
+      title={show == "code" ? "Switch to html mode" : "Switch to text mode"}
       onclick={(e: Event) => {
         e.stopPropagation();
         show == "code" ? (show = "show") : (show = "code");
       }}
     >
-      {#if show == "code"}
-        <span>View HTML</span>
-      {:else}
-        <span>View TEXT</span>
-      {/if}
     </button>
-    {#if show == "show"}
-      <button
-        class="h-full pl-4 pr-3 border-l border-neutral-300 dark:border-slate-600 hover:text-black hover:bg-yellow-200"
-        title="full screen view and generate link"
-        onclick={(e: Event) => {
-          e.stopPropagation();
-          const config = getConfig();
-          config.fullScreenHTML = true;
-
-          const link = getLink(true, config, true);
-          console.log(link);
-          fullScreenHTML.set(true);
-        }}
-      >
-        <span>Full Screen</span>
-      </button>
-    {/if}
   </div>
-</Code>
+{/snippet}
+
+<Code title="Output" watchCode="output" watchErr={true} {show} {slotAction} />

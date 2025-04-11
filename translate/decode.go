@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/BurntSushi/toml"
-	"gopkg.in/yaml.v3"
+	"sigs.k8s.io/yaml"
 )
 
 // Decode decodes the raw, yaml/json, toml and returns the result.

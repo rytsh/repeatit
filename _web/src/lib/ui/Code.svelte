@@ -20,7 +20,7 @@
     liveFunc = () => null,
     getResult = () => null,
     slotTitle = () => null,
-    slotActions = () => null,
+    slotAction = () => null,
   }: {
     title?: string;
     placeholder?: string;
@@ -32,7 +32,7 @@
     liveFunc?: () => void;
     getResult?: (v: any) => void;
     slotTitle?: () => any;
-    slotActions?: () => any;
+    slotAction?: () => any;
   } = $props();
 
   let value = $state("");
@@ -155,9 +155,9 @@
         {@render slotTitle()}
       </div>
       <div class="flex gap-2">
-        {@render slotActions()}
+        {@render slotAction()}
         <button
-          class={`text-white font-bold py-1 w-6 h-5 flex items-center
+          class={`text-white font-bold py-1 w-6 h-[1.4rem] flex items-center hover:bg-white
             ${copied ? "icon-copied" : "icon-copy"}
             ${err || success ? "bg-neutral-600" : "bg-custom-500"}
           `}

@@ -12,7 +12,7 @@
 
   import { get } from "svelte/store";
   import { location } from "svelte-spa-router";
-  import { codes, setConfig, fullScreenHTML } from "@/lib/store";
+  import { codes, setConfig } from "@/lib/store";
   import update from "immutability-helper";
   import { runIt } from "@/lib/helper/load";
   import { loadHash, shareURL, shareViewURL } from "@/lib/helper/share";
@@ -20,7 +20,7 @@
   let firstLocation = "";
   let hashCode = "";
 
-  const readShare = (vHash: string, view: boolean) => {
+  const readShare = (vHash: string) => {
     if (!vHash) {
       return;
     }
@@ -29,11 +29,7 @@
     if (!values) return;
 
     if (values.config) {
-      values.config.fullScreenHTML = view;
-
       setConfig(values.config);
-    } else {
-      fullScreenHTML.set(false);
     }
 
     codes.update((v) =>
@@ -56,57 +52,35 @@
     firstLocation = get(location);
     if (firstLocation.startsWith(shareViewURL)) {
       hashCode = firstLocation.replace(shareViewURL, "");
-      readShare(hashCode, true);
+      readShare(hashCode);
     } else if (firstLocation.startsWith(shareURL)) {
       hashCode = firstLocation.replace(shareURL, "");
-      readShare(hashCode, false);
-    } else {
-      fullScreenHTML.set(false);
+      readShare(hashCode);
     }
   }
 </script>
 
-{#if $fullScreenHTML == true}
-  <div class="fixed top-0 left-0 h-full w-full">
-    <button
-      class="block w-full bg-gray-200 text-right px-2 hover:bg-yellow-200 border-b border-gray-300"
-      on:click|stopPropagation={() => ($fullScreenHTML = false)}
+<div class="h-full w-full grid grid-rows-[auto_1fr_auto]">
+  <div>
+    <NavBar class="border-b border-neutral-300 flex-shrink-0" />
+    <div
+      class="border-b border-neutral-300 dark:border-slate-600 flex-shrink-0"
     >
-      <span>
-        <i>repeatit.io</i>
-      </span>
-    </button>
-    <iframe
-      seamless
-      sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals"
-      srcdoc={$codes.output}
-      style="width:100%;height:100%"
-      title="view html"
-    ></iframe>
-  </div>
-{:else if $fullScreenHTML == false}
-  <div class="h-full w-full grid grid-rows-[auto_1fr_auto]">
-    <div>
-      <NavBar class="border-b border-neutral-300 flex-shrink-0" />
-      <div
-        class="border-b border-neutral-300 dark:border-slate-600 flex-shrink-0"
-      >
-        <Options />
-      </div>
+      <Options />
     </div>
-
-    <View>
-      <span slot="template">
-        <Template />
-      </span>
-      <span slot="input">
-        <Input />
-      </span>
-      <span slot="output">
-        <Output />
-      </span>
-    </View>
-
-    <FootBar />
   </div>
-{/if}
+
+  <View>
+    <span slot="template">
+      <Template />
+    </span>
+    <span slot="input">
+      <Input />
+    </span>
+    <span slot="output">
+      <Output />
+    </span>
+  </View>
+
+  <FootBar />
+</div>
