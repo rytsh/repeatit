@@ -4,15 +4,18 @@
   import { codes } from "@/lib/store";
   import examples from "@/examples";
   import update from "immutability-helper";
-  import { runIt } from "@/lib/helper/load";
   import { browser } from "$app/environment";
   import { onMount } from "svelte";
   import Select from "../ui/Select.svelte";
+  import { debounce } from "../helper/debounce";
+  import { run } from "../helper/run";
 
   const exampleURL = "/example/";
 
   let firstLocation = "";
   let selected = "";
+
+  let call = debounce(run, 50);
 
   const changeSelected = (vSelected: string) => {
     if (!vSelected) {
@@ -32,10 +35,11 @@
         trigger: { $set: !v.trigger },
         error: { $set: false },
         success: { $set: false },
+        triggerError: { $set: false },
       })
     );
 
-    runIt();
+    call();
   };
 
   onMount(() => {

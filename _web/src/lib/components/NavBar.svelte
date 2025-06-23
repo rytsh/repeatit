@@ -6,6 +6,7 @@
   import Theme from "@/lib/ui/Theme.svelte";
   import Example from "@/lib/components/Example.svelte";
   import Share from "@/lib/components/Share.svelte";
+  import Help from "@/lib/components/Help.svelte";
   import "@/lib/helper/load";
 
   let { class: className } = $props();
@@ -18,11 +19,12 @@
       onclick={run}
       title="run repeatit"
     >
-      <Icon icon="repeatit" class="pr-1" />
+      <Icon icon="play" class="pr-1" />
       <span class="pl-2">RUN</span>
     </button>
     <Example />
     <Share />
+    <Help />
     {#if $loading}
       <span class="inline-block"> - Loading..</span>
     {/if}

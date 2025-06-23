@@ -1,4 +1,5 @@
-<img src="./assets/logoR.svg" alt="repeatit" height="100"/>
+![repeatit](assets/logoR.svg#gh-light-mode-only)
+![repeatit](assets/logoR_light.svg#gh-dark-mode-only)
 
 [![License](https://img.shields.io/github/license/rytsh/repeatit?color=red&style=flat-square)](https://raw.githubusercontent.com/rytsh/repeatit/master/LICENSE)
 [![repeatit.io](https://img.shields.io/badge/website-repeatit.io-blue?style=flat-square)](https://repeatit.io)

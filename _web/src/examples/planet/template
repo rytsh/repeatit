@@ -4,7 +4,7 @@ SecretName: {{.name | b64enc }}
 {{- if eq .name "machine" }}
 # welcome back
 {{else}}
-# welcome
+# welcomec
 {{end}}
 
 {{- with .specs.resources }}
@@ -14,7 +14,7 @@ water: {{ .water }}
 
 # reviews
 {{- range .reviews}}
-# {{$.name}} {{.name}} {{repeat .point "⭐"}}
+# {{$.name}} {{.name}} {{repeat (int .point) "⭐"}}
 {{- end}}
 
 {{range $index, $value := .comments }}
