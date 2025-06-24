@@ -72,7 +72,7 @@
     </div>
   </div>
 
-  <div class="flex flex-col h-full relative min-h-0">
+  <div class="flex flex-col h-full relative min-h-0 overflow-x-auto">
     <span class={["h-full min-h-full overflow-auto", !$showHelp && "hidden"]}>
       <Help/>
     </span>

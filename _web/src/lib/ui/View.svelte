@@ -113,7 +113,7 @@
   </div>
 </div>
 
-<div class="grid grid-rows-[auto_1fr] sm:hidden">
+<div class="grid grid-rows-[auto_1fr] sm:hidden h-full">
   <div class="flex justify-between text-lg">
     <button
       class={`bg-slate-200 px-2 flex-1 border-r border-slate-400 hover:bg-yellow-200 ${
