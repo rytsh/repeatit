@@ -1,5 +1,5 @@
-<img src="assets/logoR.svg#gh-light-mode-only" alt="repeatit" width="160"/>
-<img src="assets/logoR_light.svg#gh-dark-mode-only" alt="repeatit" width="160"/>
+<img src="assets/logoR.svg#gh-light-mode-only" alt="repeatit" width="220"/>
+<img src="assets/logoR_light.svg#gh-dark-mode-only" alt="repeatit" width="220"/>
 
 [![License](https://img.shields.io/github/license/rytsh/repeatit?color=red&style=flat-square)](https://raw.githubusercontent.com/rytsh/repeatit/master/LICENSE)
 [![repeatit.io](https://img.shields.io/badge/website-repeatit.io-blue?style=flat-square)](https://repeatit.io)
