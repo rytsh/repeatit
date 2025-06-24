@@ -1,6 +1,7 @@
 MAIN_FILE := cmd/jsgo/main.go
 VERSION   := $(or $(IMAGE_TAG),$(shell git describe --tags --first-parent --match "v*" 2> /dev/null || echo v0.0.0))
-OUTPUT    := _web/static/wasm/repeatit-$(VERSION).wasm
+VERSION_SANITIZE := $(shell echo $(VERSION) | sed 's/-.*//')
+OUTPUT    := _web/static/wasm/repeatit-$(VERSION_SANITIZE).wasm
 
 LOCAL_BIN_DIR := $(PWD)/bin
 
@@ -12,8 +13,8 @@ run: ## Run the application
 
 .PHONY: build
 build: values ## Build the binary file
-	@echo "> Building $(MAIN_FILE) version $(VERSION)"
-	GOOS=js GOARCH=wasm go build -trimpath -ldflags="-s -w -X main.version=$(VERSION)" -o $(OUTPUT) $(MAIN_FILE)
+	@echo "> Building $(MAIN_FILE) version $(VERSION_SANITIZE)"
+	GOOS=js GOARCH=wasm go build -trimpath -ldflags="-s -w -X main.version=$(VERSION_SANITIZE)" -o $(OUTPUT) $(MAIN_FILE)
 
 .PHONY: build-front-install
 build-front-install: ## Install the front
@@ -32,6 +33,7 @@ values: ## Extract versions
 	@echo "> Extracting package versions"
 	@grep github.com/Masterminds/sprig/v3 go.mod | xargs echo | cut -d " " -f2 | xargs -I{} echo VITE_SPRIG_VERSION={} > _web/.env
 	@go version | cut -d " " -f3- | xargs -I{} echo VITE_GO_VERSION="GOOS=js GOARCH=wasm {}" >> _web/.env
+	@echo VITE_REPEATIT_WASM_VERSION="$(VERSION_SANITIZE)" >> _web/.env
 	@echo VITE_REPEATIT_VERSION="$(VERSION)" >> _web/.env
 	@cat _web/.env
 
