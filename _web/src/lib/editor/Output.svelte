@@ -10,8 +10,8 @@
     {#if show == "show"}
       <button
         class="h-6 w-6 bg-[#525252] hover:bg-white icon-full"
-        title="open new window with full screen"
-        aria-label="open new window with full screen"
+        title="open new window with full screen with text/html"
+        aria-label="open new window with full screen with text/html"
         onclick={(e: Event) => {
           e.stopPropagation();
 
@@ -24,12 +24,26 @@
       </button>
     {/if}
     <button
+      class="h-6 w-6 bg-[#525252] hover:bg-white icon-code"
+      title="open new window with full screen with json"
+      aria-label="open new window with full screen with json"
+      onclick={(e: Event) => {
+        e.stopPropagation();
+
+        const blob = new Blob([$codes.output], { type: "application/json" });
+        const blobUrl = URL.createObjectURL(blob);
+        window.open(blobUrl, "_blank");
+        setTimeout(() => URL.revokeObjectURL(blobUrl), 3000);
+      }}
+    >
+    </button>
+    <button
       class={`h-6 w-6 bg-[#525252] hover:bg-white ${show == "code" ? "icon-html" : "icon-text"}
     `}
       aria-label={show == "code"
-        ? "Switch to html mode"
-        : "Switch to text mode"}
-      title={show == "code" ? "Switch to html mode" : "Switch to text mode"}
+        ? "switch to html mode"
+        : "switch to text mode"}
+      title={show == "code" ? "switch to html mode" : "switch to text mode"}
       onclick={(e: Event) => {
         e.stopPropagation();
         show == "code" ? (show = "show") : (show = "code");

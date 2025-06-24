@@ -1,6 +1,8 @@
 import { fullScreenKeys } from "@/lib/helper/code";
 import { get, writable } from "svelte/store";
 
+export const showHelp = writable(false);
+
 const initialEditorConfig: CodeMirror.EditorConfiguration = {
   mode: "yaml",
   lineNumbers: true,
@@ -42,7 +44,7 @@ export const convertTemplates = ["text", "html"];
 export const convertFunctions = ["", "sprig", "helm"];
 export const options = ["live"];
 
-enum inputTypes {
+export enum inputTypes {
   raw = "raw",
   yaml = "yaml",
   toml = "toml",
@@ -60,7 +62,7 @@ const initialConvertConfig = {
 export type configType = {
   template: string;
   functions: string;
-  options: string[];
+  options?: string[];
   inputType?: inputTypes,
 };
 
@@ -77,12 +79,11 @@ export const getConfig = () => {
 
 // set config from configType
 export const setConfig = (config: configType) => {
-  console.log(config);
   convertConfig.update((v) => ({
     ...v,
     template: config.template,
     functions: config.functions,
-    options: new Set(config.options),
+    ...(config.options ? { options: new Set(config.options) } : {}),
     inputType: config.inputType ?? inputTypes.yaml,
   }));
 };

@@ -12,6 +12,8 @@
 html,
 body {
   @apply h-full w-full;
+
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 .drag-line-right {

@@ -55,7 +55,7 @@
       },
       () => {
         console.warn("failed copy");
-      }
+      },
     );
   };
 
@@ -127,14 +127,14 @@
             error: { $set: false },
             success: { $set: false },
             triggerError: { $set: !v.triggerError },
-          })
+          }),
         );
 
         // live update
         if (liveFunc && $convertConfig.options.has("live")) {
           liveFunc();
         }
-      }, 2)
+      }, 2),
     );
   });
 

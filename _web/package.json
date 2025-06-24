@@ -13,6 +13,7 @@
     "pages": "gh-pages -d build"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.0.5",
     "@sveltejs/adapter-static": "^3.0.8",
     "@sveltejs/kit": "^2.16.1",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",

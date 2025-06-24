@@ -1,0 +1,5 @@
+[
+{{ range $i, $item := .data.items }}
+  {{- mustToPrettyJson $item }}{{ if ne (add $i 1) (len $.data.items) }},{{ end }}
+{{ end }}
+]

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { get } from "svelte/store";
   import { location, push } from "svelte-spa-router";
-  import { codes } from "@/lib/store";
+  import { codes, setConfig } from "@/lib/store";
   import examples from "@/examples";
   import update from "immutability-helper";
   import { browser } from "$app/environment";
@@ -27,6 +27,10 @@
     const values = examples.get(vSelected);
     if (!values) return;
 
+    if (values.config) {
+      setConfig(values.config);
+    }
+
     codes.update((v) =>
       update(v, {
         template: { $set: values.template },
@@ -49,6 +53,7 @@
         selected = firstLocation.replace(exampleURL, "");
       }
 
+      selected = decodeURIComponent(selected);
       changeSelected(selected);
     }
   });
@@ -61,7 +66,7 @@
     onchange={() => changeSelected(selected)}
   >
     <option value="">--examples--</option>
-    {#each [...examples.keys()] as name}
+    {#each [...examples.keys()] as name, i}
       <option value={name}>{name}</option>
     {/each}
   </select>

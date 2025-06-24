@@ -1,0 +1,16 @@
+data:
+  items:
+    - name: "Andromeda"
+      variants:
+        - name: "Andromeda I"
+        - name: "Andromeda II"
+    - name: "Centaurus"
+      variants:
+        - name: "Centaurus A"
+        - name: "Centaurus B"
+    - name: "Cygnus"
+    - name: "Draco"
+    - name: "Orion"
+    - name: "Pegasus"
+    - name: "Perseus"
+    - name: "Phoenix"

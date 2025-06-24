@@ -44,7 +44,7 @@
           parseInt(templateTarget.style.width) - ch
         }px`;
       },
-      () => (templateTarget.style.width = `${templateTargetWidth}px`)
+      () => (templateTarget.style.width = `${templateTargetWidth}px`),
     );
 
     mediaQuery = window.matchMedia("(min-width: 640px)");
@@ -76,7 +76,7 @@
 
         inputTarget.style.height = `${h - ch}px`;
       },
-      () => (inputTarget.style.height = `${inputTargetHeight}px`)
+      () => (inputTarget.style.height = `${inputTargetHeight}px`),
     );
   });
 </script>

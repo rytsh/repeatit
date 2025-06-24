@@ -1,9 +1,11 @@
 import type { configType } from "@/lib/store";
-import { hello } from "./hello";
-import { planet } from "./planet";
-import { tailwind } from "./tailwind";
+import { hello } from "./1-hello";
+import { forE } from "./2-for";
+import { planet } from "./3-planet";
+import { tailwind } from "./4-tailwind";
 
 interface IExample {
+  name: string;
   template: string;
   input: string;
   config?: configType
@@ -11,9 +13,10 @@ interface IExample {
 
 const examples = new Map<string, IExample>();
 
-examples.set(hello.name, hello);
-examples.set(planet.name, planet);
-examples.set(tailwind.name, tailwind);
+const exampleList = [hello, forE, planet, tailwind];
+exampleList.forEach((example, index) => {
+  examples.set(`${index + 1}- ${example.name}`, example);
+});
 
 export default examples;
 

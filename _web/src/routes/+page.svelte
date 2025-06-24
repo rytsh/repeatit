@@ -16,6 +16,8 @@
   import update from "immutability-helper";
   import { runIt } from "@/lib/helper/load";
   import { loadHash, shareURL, shareViewURL } from "@/lib/helper/share";
+  import Help from "@/help/Help.svelte";
+  import { showHelp } from "@/lib/store";
 
   let firstLocation = "";
   let hashCode = "";
@@ -60,7 +62,7 @@
   }
 </script>
 
-<div class="h-full w-full grid grid-rows-[auto_1fr_auto]">
+<div class="h-full w-full grid grid-rows-[auto_1fr_auto] overflow-auto">
   <div>
     <NavBar class="border-b border-neutral-300 flex-shrink-0" />
     <div
@@ -70,17 +72,24 @@
     </div>
   </div>
 
-  <View>
-    <span slot="template">
-      <Template />
+  <div class="flex flex-col h-full relative min-h-0">
+    <span class={["h-full min-h-full overflow-auto", !$showHelp && "hidden"]}>
+      <Help/>
     </span>
-    <span slot="input">
-      <Input />
+    <span class={["h-full", $showHelp && "hidden"]}>
+      <View>
+        <span slot="template">
+          <Template />
+        </span>
+        <span slot="input">
+          <Input />
+        </span>
+        <span slot="output">
+          <Output />
+        </span>
+      </View>
     </span>
-    <span slot="output">
-      <Output />
-    </span>
-  </View>
+  </div>
 
   <FootBar />
 </div>
