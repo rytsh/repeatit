@@ -40,7 +40,7 @@
         error: { $set: false },
         success: { $set: false },
         triggerError: { $set: false },
-      })
+      }),
     );
 
     call();

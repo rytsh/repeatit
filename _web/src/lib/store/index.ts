@@ -79,6 +79,13 @@ export const getConfig = () => {
 
 // set config from configType
 export const setConfig = (config: configType) => {
+  if (Array.isArray(config.functions)) {
+    config.functions = config.functions[0] || "helm";
+  }
+  if (config.functions == "") {
+    config.functions = "helm";
+  }
+
   convertConfig.update((v) => ({
     ...v,
     template: config.template,

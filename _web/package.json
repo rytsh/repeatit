@@ -13,7 +13,6 @@
     "pages": "gh-pages -d build"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.0.5",
     "@sveltejs/adapter-static": "^3.0.8",
     "@sveltejs/kit": "^2.16.1",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
@@ -31,6 +30,7 @@
     "immutability-helper": "^3.1.1",
     "js-base64": "^3.7.7",
     "node-inject-html": "^0.0.5",
+    "oxlint": "^1.6.0",
     "postcss": "^8.5.1",
     "postcss-load-config": "^5.1.0",
     "sass": "^1.83.4",

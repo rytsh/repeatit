@@ -5,7 +5,7 @@ import { planet } from "./3-planet";
 import { tailwind } from "./4-tailwind";
 
 interface IExample {
-  name: string;
+  name?: string;
   template: string;
   input: string;
   config?: configType

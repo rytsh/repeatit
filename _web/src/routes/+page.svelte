@@ -42,7 +42,7 @@
         trigger: { $set: !v.trigger },
         error: { $set: false },
         success: { $set: false },
-      })
+      }),
     );
 
     runIt();
@@ -74,7 +74,7 @@
 
   <div class="flex flex-col h-full relative min-h-0 overflow-x-auto">
     <span class={["h-full min-h-full overflow-auto", !$showHelp && "hidden"]}>
-      <Help/>
+      <Help />
     </span>
     <span class={["h-full", $showHelp && "hidden"]}>
       <View>
