@@ -18,7 +18,7 @@ const (
 )
 
 type TemplateExecuter interface {
-	Execute(wr io.Writer, data interface{}) error
+	Execute(wr io.Writer, data any) error
 }
 
 var GlobalTemplate *Template

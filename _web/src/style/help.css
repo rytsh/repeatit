@@ -1,0 +1,84 @@
+.prose {
+  font-size: 16px;
+  line-height: 1.6;
+  background: none;
+  code {
+    background: #212529;
+    color: #fff;
+    padding: 0.2em 0.4em;
+    border-radius: 6px;
+    font-size: 90%;
+    font-family:
+      "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+  pre {
+    background: #212529;
+    color: #fff;
+    padding: 1em;
+    overflow-x: auto;
+    font-size: 90%;
+    code {
+      background: none;
+      padding: 0;
+      border-radius: 0;
+      color: inherit;
+      font-size: inherit;
+    }
+  }
+  pre.pre-input {
+    background: #212529;
+    color: #fff;
+    padding: 1em;
+    overflow-x: auto;
+    font-size: 90%;
+    code {
+      background: none;
+      padding: 0;
+      border-radius: 0;
+      color: inherit;
+      font-size: inherit;
+    }
+  }
+  pre.pre-input {
+    background: #352208;
+  }
+  pre.pre-output {
+    background: #22333b;
+  }
+  pre + pre {
+    @apply border-t border-t-yellow-200;
+  }
+  h3,
+  h4,
+  h5 {
+    font-weight: 600;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+  h3 {
+    font-size: 1.25em;
+  }
+  h4 {
+    font-size: 1.1em;
+  }
+  h5 {
+    font-size: 1em;
+  }
+  section {
+    margin-bottom: 1.5em;
+    border-bottom: 1px solid #eaecef;
+    padding-bottom: 1em;
+  }
+}
+
+:global(.dark) .prose {
+  color: #fff;
+  h3,
+  h4,
+  h5 {
+    color: #fff;
+  }
+  section {
+    border-bottom: 1px solid #30363d;
+  }
+}

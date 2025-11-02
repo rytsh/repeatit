@@ -84,12 +84,15 @@ dockers_v2:
   - images:
       - "ghcr.io/rytsh/repeatit"
     tags:
-      - "{{ .Tag }}"
+      - >-
+        {{ .Tag }}
+      - >-
+        {{index (.Tag | splitList "-") 0 }}
       - latest
     dockerfile: ci/Dockerfile
     labels:
       "io.artifacthub.package.readme-url": "https://raw.githubusercontent.com/rytsh/repeatit/main/README.md"
-      "io.artifacthub.package.maintainers": "[{\"name\":\"Eray Ates\",\"email\":\"eates23@gmail.com\"}]"
+      "io.artifacthub.package.maintainers": '[{"name":"Eray Ates","email":"eates23@gmail.com"}]'
       "io.artifacthub.package.license": "MIT"
       "org.opencontainers.image.description": "Go Template"
       "org.opencontainers.image.created": "{{.Date}}"

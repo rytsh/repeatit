@@ -27,7 +27,7 @@
   <path d={IconTypes[icon]} />
 </svg>
 
-<style lang="scss">
+<style lang="css">
   .left {
     transform: rotate(180deg);
   }

@@ -27,15 +27,9 @@
     "allowJs": false,
     "checkJs": false,
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "$lib": [
-        "src/lib"
-      ],
-      "$lib/*": [
-        "src/lib/*"
-      ]
+      "@/*": ["src/*"],
+      "$lib": ["src/lib"],
+      "$lib/*": ["src/lib/*"]
     }
   },
   /**
@@ -52,10 +46,8 @@
     "**/*.html",
     ".eslintrc.cjs",
     "tailwind.config.cjs",
-    "public/wasm/wasm_exec.js",
+    "public/wasm/wasm_exec.js"
   ],
-  "exclude": [
-    "node_modules/*"
-  ],
+  "exclude": ["node_modules/*"],
   "extends": "./.svelte-kit/tsconfig.json"
 }

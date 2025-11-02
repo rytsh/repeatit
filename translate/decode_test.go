@@ -31,7 +31,7 @@ func TestDecode(t *testing.T) {
 				data:  "{\"test\": \"test\"}",
 				codec: "yaml",
 			},
-			want:    map[string]interface{}{"test": "test"},
+			want:    map[string]any{"test": "test"},
 			wantErr: false,
 		},
 		{
@@ -40,7 +40,7 @@ func TestDecode(t *testing.T) {
 				data:  "test: test",
 				codec: "yaml",
 			},
-			want:    map[string]interface{}{"test": "test"},
+			want:    map[string]any{"test": "test"},
 			wantErr: false,
 		},
 		{
@@ -49,7 +49,7 @@ func TestDecode(t *testing.T) {
 				data:  "test = \"test\"",
 				codec: "toml",
 			},
-			want:    map[string]interface{}{"test": "test"},
+			want:    map[string]any{"test": "test"},
 			wantErr: false,
 		},
 		{

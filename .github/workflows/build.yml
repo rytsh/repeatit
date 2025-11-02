@@ -39,6 +39,12 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_web/build
           cname: repeatit.io
+      - name: Check if release tag
+        run: |
+          if [[ ! "${{ github.ref }}" =~ ^refs/tags/v[0-9] ]]; then
+            echo "Tag does not start with v[0-9]*, skipping release steps"
+            exit 0
+          fi
       - name: Disable analytics for release
         run: |
           make values-extra build-front
