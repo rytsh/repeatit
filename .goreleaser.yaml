@@ -47,8 +47,8 @@ archives:
   - id: web
     files:
       - _web/build/**
-    name_template: "{{ .ProjectName }}-web-{{ .Version }}.tar.gz"
-    formats: [tar.gz]
+    name_template: "{{ .ProjectName }}-web-{{ .Version }}"
+    formats: [zip]
 checksum:
   name_template: "{{ .ProjectName }}-{{ .Version }}-checksums.txt"
 changelog:
