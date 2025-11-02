@@ -94,7 +94,7 @@
     ></span>
   </div>
   <div
-    class="flex-1 grid grid-rows-[auto_1fr] sm:flex-0"
+    class="flex-1 grid grow! grid-rows-[auto_1fr] sm:flex-0"
     bind:this={inOutGroup}
     bind:clientHeight={inOutMaxHeight}
   >

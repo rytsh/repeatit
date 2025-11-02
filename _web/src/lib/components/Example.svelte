@@ -59,7 +59,7 @@
 
 <Select>
   <select
-    class="w-36 px-3 h-10 py-2 text-gray-800 bg-white border-l border-r cursor-pointer hover:bg-gray-50 rounded-none outline-none appearance-none focus:ring-offset-2 focus:ring-red-400 focus:ring-2"
+    class="w-36 px-3 h-10 py-2 text-gray-800 bg-white border-l border-r border-gray-200 cursor-pointer hover:bg-gray-50 rounded-none outline-none appearance-none focus:ring-offset-2 focus:ring-red-400 focus:ring-2"
     bind:value={selected}
     onchange={() => changeSelected(selected)}
   >

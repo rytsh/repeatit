@@ -1,5 +1,6 @@
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import tailwindcss from '@tailwindcss/vite';
 
 console.log("> ENV:", process.env.NODE_ENV);
 
@@ -7,9 +8,7 @@ console.log("> ENV:", process.env.NODE_ENV);
 const config = {
   // Consult https://github.com/sveltejs/svelte-preprocess
   // for more information about preprocessors
-  preprocess: [vitePreprocess({
-    postcss: true,
-  })],
+  preprocess: [tailwindcss(), vitePreprocess()],
   compilerOptions: {
     sourcemap: !(process.env.NODE_ENV == "production"),
   },

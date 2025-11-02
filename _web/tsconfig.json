@@ -51,7 +51,6 @@
     "**/*.*rc.js",
     "**/*.html",
     ".eslintrc.cjs",
-    "postcss.config.cjs",
     "tailwind.config.cjs",
     "public/wasm/wasm_exec.js",
   ],

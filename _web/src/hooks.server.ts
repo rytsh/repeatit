@@ -45,7 +45,7 @@ export async function handle({ event, resolve }) {
   if (response.headers.get("content-type") === "text/html") {
     console.log("> Prerendering hook function called");
     let tx = await response.text();
-    if (analyticsDisabled && (repeatitVersion != "test")) {
+    if (!analyticsDisabled && (repeatitVersion != "test")) {
       tx = injectFn(tx);
     }
 

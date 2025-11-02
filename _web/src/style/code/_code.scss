@@ -1,9 +1,0 @@
-/* stylelint-disable selector-no-qualifying-type, selector-class-pattern */
-
-@use 'codemirror/lib/codemirror.css';
-@use 'codemirror/addon/lint/lint.css';
-@use 'codemirror/addon/display/fullscreen.css';
-
-.CodeMirror pre.CodeMirror-placeholder {
-  @apply text-neutral-400;
-}

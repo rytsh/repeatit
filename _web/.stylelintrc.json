@@ -11,6 +11,7 @@
     "scss/at-rule-no-unknown": null,
     "selector-max-id": 2,
     "max-nesting-depth": 3,
-    "import-notation": null
+    "import-notation": null,
+    "at-rule-empty-line-before": null
   }
 }

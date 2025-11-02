@@ -8,4 +8,5 @@
         "GOOS":"linux",
     },
     "go.installDependenciesWhenBuilding": false,
+    "oxc.enable": true,
 }
