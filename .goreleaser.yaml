@@ -1,0 +1,99 @@
+# This is an example .goreleaser.yml file with some sensible defaults.
+# Make sure to check the documentation at https://goreleaser.com
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+
+version: 2
+
+project_name: repeatit
+
+git:
+  ignore_tags:
+    - docs
+
+release:
+  footer: |
+    **Full Changelog**: https://github.com/rytsh/repeatit/compare/{{ .PreviousTag }}...{{ .Tag }}
+before:
+  hooks:
+    # You may remove this if you don't use go modules.
+    - go mod tidy
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      # - arm
+      - arm64
+    main: ./cmd/server
+    ldflags:
+      - -s -w -X main.version={{.Version}}
+    flags:
+      - -trimpath
+archives:
+  - name_template: >-
+      {{ .ProjectName }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end }}
+    format_overrides:
+      - goos: windows
+        formats: zip
+  - id: web
+    files:
+      - _web/build/**
+    name_template: "{{ .ProjectName }}-web-{{ .Version }}.tar.gz"
+    formats: [tar.gz]
+checksum:
+  name_template: "{{ .ProjectName }}-{{ .Version }}-checksums.txt"
+changelog:
+  sort: asc
+  use: github
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore"
+      - "merge conflict"
+      - Merge pull request
+      - Merge remote-tracking branch
+      - Merge branch
+      - go mod tidy
+  groups:
+    - title: Dependency updates
+      regexp: "^.*feat\\(deps\\)*:+.*$"
+      order: 300
+    - title: "New Features"
+      regexp: "^.*feat[(\\w)]*:+.*$"
+      order: 100
+    - title: "Bug fixes"
+      regexp: "^.*fix[(\\w)]*:+.*$"
+      order: 200
+    - title: "Documentation updates"
+      regexp: "^.*docs[(\\w)]*:+.*$"
+      order: 400
+    - title: Other work
+      order: 9999
+
+dockers_v2:
+  - images:
+      - "ghcr.io/rytsh/repeatit"
+    tags:
+      - "{{ .Tag }}"
+      - latest
+    dockerfile: ci/Dockerfile
+    labels:
+      "io.artifacthub.package.readme-url": "https://raw.githubusercontent.com/rytsh/repeatit/main/README.md"
+      "io.artifacthub.package.maintainers": "[{\"name\":\"Eray Ates\",\"email\":\"eates23@gmail.com\"}]"
+      "io.artifacthub.package.license": "MIT"
+      "org.opencontainers.image.description": "Go Template"
+      "org.opencontainers.image.created": "{{.Date}}"
+      "org.opencontainers.image.name": "{{.ProjectName}}"
+      "org.opencontainers.image.revision": "{{.FullCommit}}"
+      "org.opencontainers.image.version": "{{.Version}}"
+      "org.opencontainers.image.source": "{{.GitURL}}"

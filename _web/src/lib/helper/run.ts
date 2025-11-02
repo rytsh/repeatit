@@ -1,8 +1,6 @@
 import { codes, convertConfig } from "@/lib/store";
 import { get } from "svelte/store";
 
-import update from "immutability-helper";
-
 const run = async () => {
   const values = get(codes);
   const config = get(convertConfig);
@@ -21,22 +19,24 @@ const run = async () => {
         config.inputType,
       );
     } catch (error) {
-      codes.update((v) => update(v, {
-        output: { $set: error.toString() },
-        trigger: { $set: !v.trigger },
-        triggerError: { $set: !v.triggerError },
-        error: { $set: true },
-        success: { $set: false },
+      codes.update((v) => ({
+        ...v,
+        output: error.toString(),
+        trigger: !v.trigger,
+        triggerError: !v.triggerError,
+        error: true,
+        success: false,
       }));
       return;
     }
 
-    codes.update((v) => update(v, {
-      output: { $set: output },
-      trigger: { $set: !v.trigger },
-      triggerError: { $set: !v.triggerError },
-      error: { $set: false },
-      success: { $set: true },
+    codes.update((v) => ({
+      ...v,
+      output: output,
+      trigger: !v.trigger,
+      triggerError: !v.triggerError,
+      error: false,
+      success: true,
     }));
   }
 };

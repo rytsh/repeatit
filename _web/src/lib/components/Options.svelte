@@ -7,7 +7,6 @@
     uiConfig,
   } from "@/lib/store";
   import { onMount } from "svelte";
-  import update from "immutability-helper";
   import { versions } from "@/lib/store/versions";
   import { run } from "@/lib/helper/run";
   import Select from "@/lib/ui/Select.svelte";
@@ -34,29 +33,27 @@
               if (optName == "live") {
                 run();
               }
-
-              convertConfig.update((conf) =>
-                update(conf, {
-                  options: { $add: [optName] },
-                })
-              );
+              convertConfig.update((conf) => ({
+                ...conf,
+                options: new Set([...conf.options, optName]),
+              }));
             } else {
-              convertConfig.update((conf) =>
-                update(conf, {
-                  options: { $remove: [optName] },
-                })
-              );
+              convertConfig.update((conf) => ({
+                ...conf,
+                options: new Set(
+                  [...conf.options].filter((o) => o !== optName),
+                ),
+              }));
             }
           }
           break;
         case "function":
           {
             const funcName = (e.target as HTMLSelectElement).value;
-            convertConfig.update((conf) =>
-              update(conf, {
-                functions: { $set: funcName },
-              })
-            );
+            convertConfig.update((conf) => ({
+              ...conf,
+              functions: funcName,
+            }));
 
             run();
           }
@@ -64,11 +61,10 @@
         case "template":
           {
             const templateName = (e.target as HTMLSelectElement).value;
-            convertConfig.update((conf) =>
-              update(conf, {
-                template: { $set: templateName },
-              })
-            );
+            convertConfig.update((conf) => ({
+              ...conf,
+              template: templateName,
+            }));
 
             run();
           }
@@ -82,11 +78,10 @@
 
   // Settings
   const toggleSettings = () => {
-    uiConfig.update((v) =>
-      update(v, {
-        showSettings: { $set: !v.showSettings },
-      })
-    );
+    uiConfig.update((v) => ({
+      ...v,
+      showSettings: !v.showSettings,
+    }));
   };
 </script>
 

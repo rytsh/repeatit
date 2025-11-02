@@ -3,7 +3,6 @@
   import { location, push } from "svelte-spa-router";
   import { codes, setConfig } from "@/lib/store";
   import examples from "@/examples";
-  import update from "immutability-helper";
   import { browser } from "$app/environment";
   import { onMount } from "svelte";
   import Select from "../ui/Select.svelte";
@@ -31,17 +30,16 @@
       setConfig(values.config);
     }
 
-    codes.update((v) =>
-      update(v, {
-        template: { $set: values.template },
-        input: { $set: values.input },
-        output: { $set: "" },
-        trigger: { $set: !v.trigger },
-        error: { $set: false },
-        success: { $set: false },
-        triggerError: { $set: false },
-      }),
-    );
+    codes.update((v) => ({
+      ...v,
+      template: values.template,
+      input: values.input,
+      output: "",
+      trigger: !v.trigger,
+      error: false,
+      success: false,
+      triggerError: false,
+    }));
 
     call();
   };

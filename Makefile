@@ -11,10 +11,21 @@ LOCAL_BIN_DIR := $(PWD)/bin
 run: ## Run the application
 	@cd _web && pnpm run dev --host
 
-.PHONY: build
-build: values ## Build the binary file
+# ###############################################################
+
+.PHONY: build-wasm
+build-wasm: values ## Build the wasm binary file
 	@echo "> Building $(MAIN_FILE) version $(VERSION_SANITIZE)"
+	@rm -f _web/static/wasm/*
 	GOOS=js GOARCH=wasm go build -trimpath -ldflags="-s -w -X main.version=$(VERSION_SANITIZE)" -o $(OUTPUT) $(MAIN_FILE)
+
+.PHONY: build-server
+build-server: ## Build the server
+	@echo "> Building server version $(VERSION)"
+	find cmd/server/dist -mindepth 1 ! -name .gitignore -delete
+	cp -r _web/build/. cmd/server/dist/
+	goreleaser build --snapshot --clean --single-target
+# 	CGO_ENABLED=0 go build -trimpath -ldflags="-s -w -X main.version=$(VERSION)" -o bin/repeatit cmd/server/main.go
 
 .PHONY: build-front-install
 build-front-install: ## Install the front
@@ -36,6 +47,14 @@ values: ## Extract versions
 	@echo VITE_REPEATIT_WASM_VERSION="$(VERSION_SANITIZE)" >> _web/.env
 	@echo VITE_REPEATIT_VERSION="$(VERSION)" >> _web/.env
 	@cat _web/.env
+
+.PHONY: values-extra
+values-extra: ## Disable analytics for web
+	@echo "> Setting extra values"
+	@echo VITE_ANALYTICS_DISABLED=true >> _web/.env
+	@cat _web/.env
+
+# ###############################################################
 
 .PHONY: lint
 lint: ## Lint Go files

@@ -1,6 +1,7 @@
 import { minify } from "html-minifier";
 import type { Options as minifyOptions } from "html-minifier";
 const repeatitVersion = import.meta.env.VITE_REPEATIT_VERSION;
+const analyticsDisabled = import.meta.env.VITE_ANALYTICS_DISABLED === "true";
 
 const minificationOptions: minifyOptions = {
   collapseBooleanAttributes: true,
@@ -44,7 +45,7 @@ export async function handle({ event, resolve }) {
   if (response.headers.get("content-type") === "text/html") {
     console.log("> Prerendering hook function called");
     let tx = await response.text();
-    if (repeatitVersion != "test") {
+    if (analyticsDisabled && (repeatitVersion != "test")) {
       tx = injectFn(tx);
     }
 

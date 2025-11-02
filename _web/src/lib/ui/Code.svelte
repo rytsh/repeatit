@@ -2,7 +2,6 @@
   import type { Editor } from "codemirror";
   import { onDestroy, onMount } from "svelte";
   import type { codesKeys } from "@/lib/store";
-  import update from "immutability-helper";
   import { copyClip } from "@/lib/helper/copy";
   import { codes, codeTheme, convertConfig, editorConfig } from "@/lib/store";
   import { debounce } from "@/lib/helper/debounce";
@@ -121,14 +120,13 @@
           return;
         }
 
-        codes.update((v) =>
-          update(v, {
-            [watchCode]: { $set: getValue },
-            error: { $set: false },
-            success: { $set: false },
-            triggerError: { $set: !v.triggerError },
-          }),
-        );
+        codes.update((v) => ({
+          ...v,
+          [watchCode]: getValue,
+          error: false,
+          success: false,
+          triggerError: !v.triggerError,
+        }));
 
         // live update
         if (liveFunc && $convertConfig.options.has("live")) {

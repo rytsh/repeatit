@@ -27,7 +27,6 @@
     "gh-pages": "^6.3.0",
     "globals": "^15.14.0",
     "html-minifier": "^4.0.0",
-    "immutability-helper": "^3.1.1",
     "js-base64": "^3.7.7",
     "node-inject-html": "^0.0.5",
     "oxlint": "^1.6.0",

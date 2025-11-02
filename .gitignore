@@ -2,3 +2,4 @@
 /_web/static/wasm/*.wasm
 /.golangci.yml
 /coverage.*
+/dist

@@ -6,8 +6,6 @@
 
 Go template playground with wasm.
 
-Frontend developed with __sveltekit__ in prerender mode.
-
 ## Features
 
 __-__ switch html and text  
@@ -17,6 +15,8 @@ __-__ share template, input and settings
 __-__ full html output  
 
 <details><summary>Development</summary>
+
+Frontend developed with __sveltekit__ in prerender mode.
 
 Build wasm file
 

@@ -13,7 +13,6 @@
   import { get } from "svelte/store";
   import { location } from "svelte-spa-router";
   import { codes, setConfig } from "@/lib/store";
-  import update from "immutability-helper";
   import { runIt } from "@/lib/helper/load";
   import { loadHash, shareURL, shareViewURL } from "@/lib/helper/share";
   import Help from "@/help/Help.svelte";
@@ -34,16 +33,15 @@
       setConfig(values.config);
     }
 
-    codes.update((v) =>
-      update(v, {
-        template: { $set: values.template },
-        input: { $set: values.input },
-        output: { $set: "" },
-        trigger: { $set: !v.trigger },
-        error: { $set: false },
-        success: { $set: false },
-      }),
-    );
+    codes.update((v) => ({
+      ...v,
+      template: values.template,
+      input: values.input,
+      output: "",
+      trigger: !v.trigger,
+      error: false,
+      success: false,
+    }));
 
     runIt();
   };
