@@ -35,6 +35,12 @@ build-front-install: ## Install the front
 build-front: build-front-install ## Build the front
 	@cd _web && pnpm run build
 
+.PHONY: copy-output
+copy-output: ## Copy output files
+	@rm -rf repeatit
+	@mkdir -p repeatit
+	@cp -a _web/build/. repeatit/
+
 .PHONY: preview
 preview: ## Preview the front
 	@cd _web && pnpm run preview

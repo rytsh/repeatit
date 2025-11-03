@@ -46,9 +46,9 @@ archives:
       - goos: windows
         formats: zip
   - id: web
-    builds: []
+    meta: true
     files:
-      - _web/build/**
+      - src: repeatit/**
     name_template: "{{ .ProjectName }}-web-{{ .Version }}"
     formats: [zip]
 checksum:
@@ -89,7 +89,7 @@ dockers_v2:
       - >-
         {{ .Tag }}
       - >-
-        {{index (.Tag | splitList "-") 0 }}
+        {{index (split .Tag "-") 0 }}
       - latest
     dockerfile: ci/Dockerfile
     labels:

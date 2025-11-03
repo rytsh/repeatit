@@ -47,7 +47,7 @@ jobs:
           fi
       - name: Disable analytics for release
         run: |
-          make values-extra build-front
+          make values-extra build-front copy-output
       - name: Log in to the Container registry
         uses: docker/login-action@v3
         with:
