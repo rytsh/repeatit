@@ -1,5 +1,6 @@
 FROM scratch
 
-COPY repeatit /repeatit
+ARG TARGETPLATFORM
+COPY $TARGETPLATFORM/repeatit /
 
 ENTRYPOINT ["/repeatit"]
