@@ -34,7 +34,8 @@ builds:
     flags:
       - -trimpath
 archives:
-  - name_template: >-
+  - id: binary
+    name_template: >-
       {{ .ProjectName }}_
       {{- title .Os }}_
       {{- if eq .Arch "amd64" }}x86_64
@@ -45,6 +46,7 @@ archives:
       - goos: windows
         formats: zip
   - id: web
+    builds: []
     files:
       - _web/build/**
     name_template: "{{ .ProjectName }}-web-{{ .Version }}"
