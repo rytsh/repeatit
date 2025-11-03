@@ -22,8 +22,6 @@ build-wasm: values ## Build the wasm binary file
 .PHONY: build-server
 build-server: ## Build the server
 	@echo "> Building server version $(VERSION)"
-	find cmd/server/dist -mindepth 1 ! -name .gitignore -delete
-	cp -r _web/build/. cmd/server/dist/
 	goreleaser build --snapshot --clean --single-target
 # 	CGO_ENABLED=0 go build -trimpath -ldflags="-s -w -X main.version=$(VERSION)" -o bin/repeatit cmd/server/main.go
 
@@ -40,6 +38,8 @@ copy-output: ## Copy output files
 	@rm -rf repeatit
 	@mkdir -p repeatit
 	@cp -a _web/build/. repeatit/
+	@find cmd/server/dist -mindepth 1 ! -name .gitignore -delete
+	@cp -a _web/build/. cmd/server/dist/
 
 .PHONY: preview
 preview: ## Preview the front
