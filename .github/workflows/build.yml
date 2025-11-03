@@ -8,6 +8,7 @@ permissions:
   # Give the workflow permission to write attestations.
   id-token: write
   attestations: write
+  contents: write
 jobs:
   release:
     runs-on: ubuntu-latest
