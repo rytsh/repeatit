@@ -1,5 +1,5 @@
 FROM scratch
 
-COPY bin/repeatit /repeatit
+COPY repeatit /repeatit
 
 ENTRYPOINT ["/repeatit"]
