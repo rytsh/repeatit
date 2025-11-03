@@ -6,19 +6,18 @@
 
 Go template playground with wasm.
 
+__-__ switch html and text  
+__-__ sprig, helm functions  
+__-__ html view  
+__-__ share template, input and settings  
+
 > Download binary/static from [releases](https://github.com/rytsh/repeatit/releases) or try docker image:
 
 ```sh
 docker run -it --rm -p 8080:8080 ghcr.io/rytsh/repeatit:latest
 ```
 
-## Features
-
-__-__ switch html and text  
-__-__ sprig, helm functions  
-__-__ html view  
-__-__ share template, input and settings  
-__-__ full html output  
+---
 
 <details><summary>Server Configuration</summary>
 
