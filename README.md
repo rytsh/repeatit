@@ -9,7 +9,7 @@ Go template playground with wasm.
 > Download binary/static from [releases](https://github.com/rytsh/repeatit/releases) or try docker image:
 
 ```sh
-docker run -p 8080:8080 ghcr.io/rytsh/repeatit:latest
+docker run -it --rm -p 8080:8080 ghcr.io/rytsh/repeatit:latest
 ```
 
 ## Features
@@ -19,6 +19,40 @@ __-__ sprig, helm functions
 __-__ html view  
 __-__ share template, input and settings  
 __-__ full html output  
+
+<details><summary>Server Configuration</summary>
+
+Add config file `repeatit.[yaml|yml|json|toml]` in root of the container or use environment variables.
+
+> Environment variables have prefix `REPEATIT_` and use `_` instead of `.`.  
+> For example `REPEATIT_PATH_PREFIX=/repeatit`.
+
+```yaml
+log_level: info
+address: ":8080"
+path_prefix: "" # for example "/repeatit"
+encoding:
+  disabled: false
+  encoding: # empty list's default to ["gzip"]
+    - gzip
+cors:
+  allow_origins:
+    - "*" # for example "https://example.com"
+  allow_methods:
+    - GET
+    - HEAD
+    - PUT
+    - POST
+    - PATCH
+    - DELETE
+  allow_headers: []
+  allow_credentials: false
+  unsafe_wildcard_origin_with_allow_credentials: false
+  expose_headers: []
+  max_age: 0
+```
+
+</details>
 
 <details><summary>Development</summary>
 

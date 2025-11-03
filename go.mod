@@ -16,7 +16,7 @@ require (
 	github.com/rakunlabs/ada/middleware/telemetry v0.1.0
 	github.com/rakunlabs/chu v0.2.6
 	github.com/rakunlabs/into v0.4.2
-	github.com/rakunlabs/logi v0.4.4
+	github.com/rakunlabs/logi v0.4.5
 	sigs.k8s.io/yaml v1.6.0
 )
 
