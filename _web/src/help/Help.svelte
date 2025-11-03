@@ -106,10 +106,6 @@ First item: {{ $firstItem }}`}
         description="Comments are ignored during template execution."
         template={`{{/* This is a comment and will be ignored */ -}}`}
       />
-    </div>
-    <h3>Function References</h3>
-    <h4 class="bg-gray-200 dark:bg-gray-700">Helm functions</h4>
-    <div>
       <CodePart
         title={`define(string)`}
         description={`Nested template definition. <a href="https://pkg.go.dev/text/template#hdr-Nested_template_definitions" target="_blank">https://pkg.go.dev/text/template#hdr-Nested_template_definitions</a>`}
@@ -118,6 +114,10 @@ First item: {{ $firstItem }}`}
         input={`name: "World"`}
         output="Hello, World!"
       />
+    </div>
+    <h3>Function References</h3>
+    <h4 class="bg-gray-200 dark:bg-gray-700">Helm functions</h4>
+    <div>
       <CodePart
         title={`tpl(string, interface {}) string`}
         description="Renders a template string with the given context."
@@ -128,7 +128,10 @@ First item: {{ $firstItem }}`}
       <CodePart
         title={`include(string, interface {}) string`}
         description="Renders a named template with the given context."
-        template={`{{ include "mytemplate" . }}`}
+        template={`{{- define "mytemplate" }}Hello, {{ .name }}!{{ end -}}
+{{ include "mytemplate" . }}`}
+        input={`name: "World"`}
+        output="Hello, World!"
       />
       <CodePart
         title={`required(string, interface {}) interface {}`}
